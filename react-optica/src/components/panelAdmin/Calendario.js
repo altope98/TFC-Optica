@@ -7,7 +7,7 @@ import Global from "../../Global"
 import { Modal, Button } from 'react-bootstrap';
 import swal from 'sweetalert';
 
-require('moment/locale/es.js');
+
 const localizer = momentLocalizer(moment)
 
 class Calendario extends Component {
@@ -22,11 +22,7 @@ class Calendario extends Component {
         show: false,
     }
 
-
-    
     componentWillMount() {
-        
-
         axios.get(this.url + 'updatedcitas').then((response) => {
             if (response.data.status === 'success') {
                 this.setState({
@@ -49,43 +45,16 @@ class Calendario extends Component {
     }
 
 
-    actualizadorCitas=()=>{
-        var date = moment().format('L');
-        var hora = moment().format('LT');
-        var fecha = date + " " + hora
-        this.eventsList=[];
+    actualizadorCitas = () => {
+        this.eventsList = [];
         this.state.citas.forEach((element, i) => {
-            let fecha2 = element.cita.fecha + " " + element.cita.hora
-            let isAfter = moment(fecha, 'YYYY-MM-DD hh:mm').isAfter(moment(fecha2, 'YYYY-MM-DD hh:mm'));
-            if (isAfter) {
-                let cita = element.cita;
-                let id = element.citaId;
-                cita.estado = "terminado";
-
-                axios.put(this.url + 'cita', { cita, id }).then((response) => {
-                    if (response.data.status === 'success') {
-                        let citasaux = this.state.citas;
-                        citasaux.splice(i, 1);
-                        this.setState({
-                            citas: citasaux,
-                            status: 'success'
-                        });
-                        this.forceUpdate();
-
-                    } else {
-                        console.log(response.data.error)
-                    }
-                });
-            }
-
-            let fecha_split = element.cita.fecha.split("/");
-            let hora_split = element.cita.hora.split(":");
-
+            let fecha2_split = element.cita.fecha.split("/");
+            let hora2_split = element.cita.hora.split(":");
             this.eventsList.push(
                 {
                     title: element.cita.user.nombre + " " + element.cita.user.apellidos,
-                    start: new Date(parseInt(fecha_split[2]), parseInt(fecha_split[1]) - 1, parseInt(fecha_split[0]), parseInt(hora_split[0]), parseInt(hora_split[1]), 0),
-                    end: new Date(parseInt(fecha_split[2]), parseInt(fecha_split[1]) - 1, parseInt(fecha_split[0]), parseInt(hora_split[0]) + 1, parseInt(hora_split[1]), 0),
+                    start: new Date(parseInt(fecha2_split[2]), parseInt(fecha2_split[1]) - 1, parseInt(fecha2_split[0]), parseInt(hora2_split[0]), parseInt(hora2_split[1]), 0),
+                    end: new Date(parseInt(fecha2_split[2]), parseInt(fecha2_split[1]) - 1, parseInt(fecha2_split[0]), parseInt(hora2_split[0]) + 1, parseInt(hora2_split[1]), 0),
                     id: element.citaId
                 }
             );
@@ -112,36 +81,50 @@ class Calendario extends Component {
         this.citaaux = [];
     }
 
-    updateCita(event, id){
-        event.preventDefault(); 
+    
+    updateCita(event, id) {
+        event.preventDefault();
 
-        let fecha=moment(event.target[0].value).format("DD/MM/YYYY")
-        let hora=event.target[1].value 
-        let cita= this.citaaux[0].cita;
-        cita.hora=hora;
-        cita.fecha=fecha;
-        cita.estado='actualizado';
+        let fecha = moment(event.target[0].value).format("DD/MM/YYYY")
+        let hora = event.target[1].value
+        let cita = this.citaaux[0].cita;
+        cita.hora = hora;
+        cita.fecha = fecha;
+        cita.estado = 'actualizado';
 
-        axios.put(this.url + 'cita', {cita, id}).then((response) => {
+        axios.put(this.url + 'cita', { cita, id }).then((response) => {
             if (response.data.status === 'success') {
                 this.actualizadorCitas();
                 this.cerradoEvento();
                 swal(
                     'Cita guardada correctamente',
-                    'Cita se ha guardado en tu calendario correctamente', 
+                    'Cita se ha guardado en tu calendario correctamente',
                     'success'
                 );
                 this.forceUpdate();
+                axios.post(this.url + 'email/cambiocita', { cita });
 
-            }else{
-                console.log(response.data.error)
+            } else {
                 swal(
                     'Cita no se ha guardado correctamente',
                     'Cita no se ha guardado en tu calendario',
                     'error'
                 );
-            } 
-        }); 
+            }
+        });
+    }
+
+    envioRecordatorio(citaaux) {
+        let cita = citaaux;
+        axios.post(this.url + 'email/recordatorio', { cita }).then((response) => {
+            if (response.data.status === 'success') {
+                swal(
+                    'Recordatorio de cita enviado',
+                    'Se ha enviado un correo de recordatorio al cliente',
+                    'success'
+                );
+            }
+        });
     }
 
 
@@ -168,6 +151,8 @@ class Calendario extends Component {
                 </div>
 
 
+
+                        {/* MODAL DE DETALLE DE CITA */}
                 {this.citaaux.length === 1 &&
                     <Modal show={this.state.show} onHide={this.cerradoEvento} size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
@@ -187,7 +172,7 @@ class Calendario extends Component {
 
                             <div className="infoactualizarcita mt-3">
 
-                                {/* INPUT DATE Y HORA Y BOTON PARA ACTUALIZAR JUNTO CON TITULO DE CAMBIO Y BORDES SEÑALADOS */}
+                                {/* INPUT DATE Y HORA Y BOTON PARA ACTUALIZAR  */}
                                 <form className="col-12" onSubmit={(e) => this.updateCita(e, this.citaaux[0].citaId)}>
                                     <div className="row">
                                         <div className="col">
@@ -197,20 +182,22 @@ class Calendario extends Component {
                                             <input className="form-control m-1 " type="time" name="horaCita" min="09:00" max="20:00" required />
                                         </div>
                                         <div className="col">
-                                        <input className="btn btn-success m-1" type="submit" value="Actualizar cita" />
+                                            <input className="btn btn-success m-1" type="submit" value="Actualizar cita" />
                                         </div>
                                     </div>
+                                    </form>
+                                    {/* BOTON ENVIAR RECORDATORIO */}
                                     <div className="row">
                                         <div className="col d-flex justify-content-between  mt-2 mb-2">
-                                            <button className="btn btn-primary m-auto" >Enviar recordatorio</button>
+                                            <button className="btn btn-primary m-auto" onClick={() => this.envioRecordatorio(this.citaaux[0].cita)} >Enviar recordatorio</button>
                                         </div>
                                     </div>
-                                </form>
+                                
                             </div>
 
 
 
-                            {/* BOTON ENVIAR RECORDATORIO */}
+                            
 
                         </Modal.Body>
                         <Modal.Footer>

@@ -3,6 +3,8 @@
 var express=require('express');
 var UserController=require('../controllers/user');
 var CitasController=require('../controllers/citas');
+var EmailController=require('../emails/email');
+
 
 var router= express.Router();
 
@@ -18,6 +20,15 @@ router.post('/cita', CitasController.save );
 router.put('/cita', CitasController.update );
 router.get('/pendingcitas', CitasController.getPendingCitas );
 router.get('/updatedcitas', CitasController.getUpdatedCitas );
+
+
+router.post('/email/cita', EmailController.nuevaCita );
+router.post('/email/confirmacita', EmailController.confirmaCita );
+router.post('/email/cambiocita', EmailController.cambioCita );
+router.post('/email/recordatorio', EmailController.recordatorioCita );
+
+
+
 
 
 /* router.post('/push', User.notificacion); */

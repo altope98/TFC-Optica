@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "dev":"nodemon index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alvaro Torrente Perez",
@@ -17,8 +17,10 @@
     "express": "^4.17.1",
     "firebase": "^7.13.1",
     "firebase-admin": "^8.10.0",
+    "handlebars": "^4.7.6",
     "jwt-simple": "^0.5.6",
     "moment": "^2.24.0",
+    "node-cron": "^2.0.3",
     "nodemailer": "^6.4.6",
     "validator": "^13.0.0"
   },

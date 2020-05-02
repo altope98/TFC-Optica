@@ -82,6 +82,8 @@ class Citas extends Component {
                         'Contactaremos contigo por email',
                         'success'
                     );
+
+                    axios.post(this.url + 'email/cita');
                 } else {
                     this.setState({
                         status: 'failed'

@@ -4,7 +4,7 @@ var validator = require('validator');
 var db = require('../index');
 var messaging = require('../index');
 var firebase = require("firebase");
-
+var cron = require('node-cron');
 var cita = {
     estado: null,
     fecha: null,
@@ -16,6 +16,12 @@ var cita = {
         telefono: null
     }
 }
+
+
+cron.schedule('0 00 */1 * * *', () => {
+    controller.comprobadorAntiguedad();
+});
+
 
 
 var controller = {
@@ -64,88 +70,130 @@ var controller = {
     },
 
     update: (request, response) => {
-        let requestedCita=request.body.cita;
+        let requestedCita = request.body.cita;
 
-        db.collection('citas').doc(request.body.id).update(requestedCita).then(()=>{
+        db.collection('citas').doc(request.body.id).update(requestedCita).then(() => {
             return response.status(200).send({
                 status: 'success',
                 message: "Cita actualizada",
             });
-        }).catch((err)=>{
+        }).catch((err) => {
             return response.status(500).send({
                 status: 'error',
                 message: "Cita no actualizada",
-                error:err
+                error: err
             });
-        });  
+        });
 
     },
 
-    getPendingCitas:(request, response)=>{
-        let citas=[];
-        db.collection('citas').where('estado','==', 'pendiente').get()
-                .then(snapshot => {
-                    if (snapshot.empty) {
-                        return response.status(200).send({
-                            status: 'error',
-                            message: 'No existen citas'
-                        });
-                    }
-
-                    snapshot.forEach(doc => {
-                        citas.push({citaId:doc.id, cita:doc.data()});
-                        
-                    });
+    getPendingCitas: (request, response) => {
+        let citas = [];
+        db.collection('citas').where('estado', '==', 'pendiente').get()
+            .then(snapshot => {
+                if (snapshot.empty) {
                     return response.status(200).send({
-                        status: 'success',
-                        citas
-                    });
-                })
-                .catch(err => {
-                    return response.status(500).send({
                         status: 'error',
-                        message: 'Error al obtener usuarios',
-                        error:err
+                        message: 'No existen citas'
                     });
+                }
+
+                snapshot.forEach(doc => {
+                    citas.push({ citaId: doc.id, cita: doc.data() });
+
                 });
+                return response.status(200).send({
+                    status: 'success',
+                    citas
+                });
+            })
+            .catch(err => {
+                return response.status(500).send({
+                    status: 'error',
+                    message: 'Error al obtener usuarios',
+                    error: err
+                });
+            });
 
     },
 
-    getUpdatedCitas:(request, response)=>{
-        let citas=[];
-        db.collection('citas').where('estado','==', 'actualizado').get()
-                .then(snapshot => {
-                    if (snapshot.empty) {
-                        return response.status(200).send({
-                            status: 'error',
-                            message: 'No existen citas'
-                        });
-                    }
-
-                    snapshot.forEach(doc => {
-                        citas.push({citaId:doc.id, cita:doc.data()});
-                        
-                    });
+    getUpdatedCitas: (request, response) => {
+        let citas = [];
+        db.collection('citas').where('estado', '==', 'actualizado').get()
+            .then(snapshot => {
+                if (snapshot.empty) {
                     return response.status(200).send({
-                        status: 'success',
-                        citas
-                    });
-                })
-                .catch(err => {
-                    return response.status(500).send({
                         status: 'error',
-                        message: 'Error al obtener usuarios',
-                        error:err
+                        message: 'No existen citas'
                     });
+                }
+
+                snapshot.forEach(doc => {
+                    citas.push({ citaId: doc.id, cita: doc.data() });
+
                 });
+                return response.status(200).send({
+                    status: 'success',
+                    citas
+                });
+            })
+            .catch(err => {
+                return response.status(500).send({
+                    status: 'error',
+                    message: 'Error al obtener usuarios',
+                    error: err
+                });
+            });
 
     },
 
-    getCitaById:(request, response)=>{
-
-    }
 
 
+    comprobadorAntiguedad: () => {
+        let citas = [];
+        let status;
+        db.collection('citas').where('estado', '==', 'actualizado').get()
+            .then(snapshot => {
+                if (snapshot.empty) {
+                    status = 'error';
+                }
+                snapshot.forEach(doc => {
+                    citas.push({ citaId: doc.id, cita: doc.data() });
+
+                });
+                status = 'success'
+                
+                if (status == 'success') {
+                    citas.forEach(element => {
+                        let fecha2_split = element.cita.fecha.split("/");
+                        let hora2_split = element.cita.hora.split(":");
+                        let isAfter = false
+                        if (new Date() > new Date(parseInt(fecha2_split[2]), parseInt(fecha2_split[1]) - 1, parseInt(fecha2_split[0]), parseInt(hora2_split[0]), parseInt(hora2_split[1]), 0)) {
+                            isAfter = true;
+                        } else {
+                            isAfter = false;
+                        }
+                        if (isAfter === true) {
+                            let cita = element.cita;
+                            let id = element.citaId;
+                            cita.estado = "terminado";
+                            db.collection('citas').doc(id).update(cita).then(() => {
+                                    status= 'success';
+                            }).catch((err) => {
+                                    status= 'error';
+            
+                            });
+                        }
+                    });
+                }
+            })
+            .catch(err => {
+                status = 'error'
+
+            });
+    },
+
+    
 }
 
 
