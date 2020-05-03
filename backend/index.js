@@ -34,7 +34,7 @@ module.exports= db;
 
 var app= require('./app');
 
-const PORT = process.env.PORT || 5000 //3000  //5000 
+const PORT = process.env.PORT || 5000   // 3000
 app.listen(PORT, ()=>{
   console.log('servidor corriendo en '+PORT);
 });
