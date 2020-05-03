@@ -46,11 +46,13 @@ class Login extends Component {
                 telefono: "",
                 dni: "",
             }
-            axios.post(this.url + 'user2', user);
-
-            this.setState({
-                status: 'success'
-            })
+            axios.post(this.url + 'user2', user).then((response)=>{
+                if(response.data){
+                    this.setState({
+                        status: 'success'
+                    })
+                }
+            });
         })
     }
 
@@ -59,7 +61,6 @@ class Login extends Component {
 
         auth.signInWithPopup(provider).then((result) => {
             var current = result.user;
-            console.log(current)
             let name = current.displayName.split(" ");
             let user = {
                 nombre: name[0],
@@ -68,11 +69,14 @@ class Login extends Component {
                 telefono: "",
                 dni: "",
             }
-            console.log(user)
-            axios.post(this.url + 'user2', user);
-            this.setState({
-                status: 'success'
-            })
+            axios.post(this.url + 'user2', user).then((response)=>{
+                if(response.data){
+                    this.setState({
+                        status: 'success'
+                    })
+                }
+            });
+            
         })
     }
 
@@ -145,15 +149,6 @@ class Login extends Component {
                     <button className="btnfacebook row" onClick={() => this.inicioFacebook()}><img src="https://www.gstatic.com/mobilesdk/160409_mobilesdk/images/auth_service_facebook.svg" alt="facebook-boton" /> <p>Inicia sesion con Facebook</p></button>
 
                 </div>
-
-                {/* <section id="firebaseui-auth-container">
-
-                    {this.state.current!==null &&
-                        <Redirect to="/tope-vision/logged" />
-                    }
-
-                </section> */}
-
             </div>
         );
 
