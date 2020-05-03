@@ -60,6 +60,7 @@ class Header extends Component {
         return (
 
             <React.Fragment>
+                
             {this.state.redirect===true &&
                             
                 <Redirect to="/tope-vision/signout"/>
@@ -106,7 +107,7 @@ class Header extends Component {
                                     <li class="nav-item dropdown" >
                                         <p class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {this.state.user.nombre + ' ' + this.state.user.apellidos}
-                                             </p>
+                                        </p>
 
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             {this.state.user.admin === false 

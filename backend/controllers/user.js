@@ -4,6 +4,8 @@ var validator = require('validator');
 var db = require('../index');
 var messaging = require('../index');
 var firebase = require("firebase");
+var auth= require('../index');
+var admin= require('firebase-admin')
 
 var user = {
     nombre: null,
@@ -12,15 +14,15 @@ var user = {
     historial: [],
     telefono: null,
     dni: null,
+    imagen:null,
     admin: false
 }
 
 var controller = {
 
-
     save: (request, response) => {
-        let requestedUser=request.body;
-
+        let requestedUser=request.body.user;
+        let url=request.body.url;
         try {
             var validate_nombre = !validator.isEmpty(requestedUser.nombre);
             var validate_apellidos = !validator.isEmpty(requestedUser.apellidos);
@@ -39,8 +41,6 @@ var controller = {
 
         if (validate_nombre && validate_apellidos && validate_email && validate_password && validate_dni && validate_telefono) {
             
-
-
             db.collection('users').where('email', '==', requestedUser.email).get()
             .then(snapshot => {
                 if (snapshot.empty) {
@@ -52,6 +52,7 @@ var controller = {
                         user.email = requestedUser.email;
                         user.dni = requestedUser.dni;
                         user.telefono = requestedUser.telefono;
+                        user.imagen=url
 
                         db.collection('users').add(user);
         
@@ -72,6 +73,58 @@ var controller = {
                                 error: err.message
                             });
                         }
+                    });
+                }
+            }).catch(err => {
+                return response.status(500).send({
+                    status:'error',
+                    message: 'El usuario ya esta registrado'
+                });
+            });
+        } else {
+            return response.status(200).send({
+                status: 'error',
+                message: "Datos no validos"
+            });
+        }
+    },
+
+    save2: (request,response)=>{
+        let requestedUser=request.body;
+
+        try {
+            var validate_nombre = !validator.isEmpty(requestedUser.nombre);
+            var validate_apellidos = !validator.isEmpty(requestedUser.apellidos);
+            var validate_email =  !validator.isEmpty(requestedUser.email);
+
+
+        } catch (error) {
+            return response.status(200).send({
+                status: 'error',
+                message: "Faltan datos"
+            });
+        }
+
+        if (validate_nombre && validate_apellidos && validate_email) {
+            db.collection('users').where('email', '==', requestedUser.email).get()
+            .then(snapshot => {
+                if (snapshot.empty) {
+                        user.nombre = requestedUser.nombre;
+                        user.apellidos = requestedUser.apellidos;
+                        user.email = requestedUser.email;
+                        user.dni = requestedUser.dni;
+                        user.telefono = requestedUser.telefono;
+
+                        db.collection('users').add(user);
+        
+                        return response.status(200).send({
+                            status: 'success',
+                            message: "Usuario registrado"
+                        });
+                }else{
+                    return response.status(200).send({
+                        status:'error',
+                        message: 'El usuario ya esta registrado'
                     });
                 }
             }).catch(err => {
@@ -257,6 +310,8 @@ var controller = {
     },
     update:(request,response)=>{
         let requestedUser=request.body.user;
+        let url=request.body.url;
+        requestedUser.imagen=url;
         /*admin:false
         apellidos:"Torrente Perez"
         dni:"4758839467L"
@@ -264,6 +319,8 @@ var controller = {
         historial:null
         nombre:"Alvaro"
         telefono:"354235432"*/
+
+        console.log(requestedUser)
 
          db.collection('users').doc(request.body.userId).update(requestedUser).then(()=>{
             return response.status(200).send({
@@ -277,6 +334,23 @@ var controller = {
                 error:err
             });
         });  
+    },
+
+    delete:(request, response)=>{
+        let id=request.params.id;
+        db.collection('users').doc(id).get().then((doc) => {
+                    let user= doc.data();
+                    admin.auth().getUserByEmail(user.email).then((userRecord) => {
+                        admin.auth().deleteUser(userRecord.uid).then(()=> {
+                            db.collection("users").doc(id).delete().then(()=> {
+                                return response.status(200).send({
+                                    status: 'success',
+                                    message: "Usuario eliminado",
+                                });
+                            });
+                          });
+                    });  
+        });
     },
 
 

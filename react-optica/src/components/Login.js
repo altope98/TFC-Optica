@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-/* import axios from "axios"; */
+import axios from "axios";
 import Global from "../Global";
 import SimpleReactValidator from 'simple-react-validator';
-/* import swal from 'sweetalert'; */
-import {auth} from '../db'
+import { auth } from '../db'
+import firebase from 'firebase';
+
+
 
 class Login extends Component {
 
@@ -14,13 +16,11 @@ class Login extends Component {
     url = Global.url;
 
     state = {
-        email:null,
-        password:null,
+        email: null,
+        password: null,
         status: null,
+        user: {},
     };
-
-
-
     componentWillMount() {
         this.validator = new SimpleReactValidator({
             messages: {
@@ -33,13 +33,54 @@ class Login extends Component {
         });
     }
 
+    inicioGoogle = () => {
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        auth.signInWithPopup(provider).then((result) => {
+            var current = result.user;
+            let name = current.displayName.split(" ");
+            let user = {
+                nombre: name[0],
+                apellidos: name[1],
+                email: current.email,
+                telefono: "",
+                dni: "",
+            }
+            axios.post(this.url + 'user2', user);
+
+            this.setState({
+                status: 'success'
+            })
+        })
+    }
+
+    inicioFacebook = () => {
+        var provider = new firebase.auth.FacebookAuthProvider();
+
+        auth.signInWithPopup(provider).then((result) => {
+            var current = result.user;
+            console.log(current)
+            let name = current.displayName.split(" ");
+            let user = {
+                nombre: name[0],
+                apellidos: name[1],
+                email: current.email,
+                telefono: "",
+                dni: "",
+            }
+            console.log(user)
+            axios.post(this.url + 'user2', user);
+            this.setState({
+                status: 'success'
+            })
+        })
+    }
+
     changeState = () => {
         this.setState({
-            email:this.emailRef.current.value,
-            password:this.passwordRef.current.value
+            email: this.emailRef.current.value,
+            password: this.passwordRef.current.value
         });
-
-        
     }
 
     recibirFormulario = (event) => {
@@ -50,12 +91,12 @@ class Login extends Component {
         if (this.validator.allValid()) {
             auth.signInWithEmailAndPassword(this.state.email, this.state.password).then(() => {
                 this.setState({
-                    password:null,
+                    password: null,
                     status: 'success'
                 })
-              }).catch((err) => {
+            }).catch((err) => {
                 alert(err.message)
-              })
+            })
         } else {
             this.validator.showMessages();
             this.forceUpdate();
@@ -73,9 +114,11 @@ class Login extends Component {
                 <Redirect to="/tope-vision/logged" />
             )
         }
+
         return (
 
-            <div id="login"  className=" col-12">
+            <div id="login" className=" col-12">
+
                 <h2 className="text-center p-3 text-md-left">
                     Iniciar sesion
                 </h2>
@@ -96,9 +139,25 @@ class Login extends Component {
                     <div className="clearfix"></div>
                     <input type="submit" value="Iniciar sesion" class="btn btn-success" />
                 </form>
+
+                <div className="botonessesion">
+                    <button className="btngoogle row" onClick={() => this.inicioGoogle()}><img src="https://www.gstatic.com/mobilesdk/160512_mobilesdk/auth_service_google.svg" alt="google-boton" /> <p>Inicia sesion con Google</p></button>
+                    <button className="btnfacebook row" onClick={() => this.inicioFacebook()}><img src="https://www.gstatic.com/mobilesdk/160409_mobilesdk/images/auth_service_facebook.svg" alt="facebook-boton" /> <p>Inicia sesion con Facebook</p></button>
+
+                </div>
+
+                {/* <section id="firebaseui-auth-container">
+
+                    {this.state.current!==null &&
+                        <Redirect to="/tope-vision/logged" />
+                    }
+
+                </section> */}
+
             </div>
         );
+
     }
 }
- 
+
 export default Login;

@@ -9,11 +9,13 @@ var EmailController=require('../emails/email');
 var router= express.Router();
 
 router.post('/user', UserController.save);
+router.post('/user2', UserController.save2);
 router.get('/user/:email', UserController.getUser);
 router.get('/getuser/:id', UserController.getUserById);
 router.get('/getemail/:id', UserController.getEmailById);
 router.get('/users', UserController.getUsers);
 router.put('/user', UserController.update);
+router.delete('/user/:id', UserController.delete);
 
 
 router.post('/cita', CitasController.save );

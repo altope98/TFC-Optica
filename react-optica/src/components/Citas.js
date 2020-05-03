@@ -41,6 +41,20 @@ class Citas extends Component {
                         // eslint-disable-next-line
                         return validator.helpers.testRegex(val, /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i) && params.indexOf(val) === -1
                     },
+                },
+                telefono:{
+                    message: 'El telefono no es valido',
+                    rule: (val, params, validator) => {
+                        // eslint-disable-next-line
+                        return validator.helpers.testRegex(val, /^[896]\d{8}$/) && params.indexOf(val) === -1
+                    },
+                },
+                dni:{
+                    message: 'El DNI no es valido',
+                    rule: (val, params, validator) => {
+                        // eslint-disable-next-line
+                        return validator.helpers.testRegex(val, /^\d{8}[a-zA-Z]$/) && params.indexOf(val) === -1
+                    },
                 }
             },
             messages: {
@@ -130,7 +144,7 @@ class Citas extends Component {
             <div className="form-group text-left">
                 <label htmlFor="telefono" className="ml-2">Telefono</label>
                 <input className="form-control mr-2 ml-2" type="text" name="telefono" ref={this.telefonoRef} onChange={this.changeState} maxLength="9" required />
-                {this.validator.message('telefono', this.state.cita.telefono, 'required|numeric')}
+                {this.validator.message('telefono', this.state.cita.telefono, 'required|telefono')}
             </div>
             <div className="form-group text-left">
                 <label htmlFor="email" className="ml-2">Email</label>

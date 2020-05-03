@@ -237,7 +237,7 @@ var controller = {
                                 var htmlToSend = template(replacements);
                                 var mailOptions = {
                                     from: 'opticatopevision@gmail.com',
-                                    to: cita.user.email,
+                                    to: cita.cita.user.email,
                                     subject: 'Recordatorio Proxima Cita',
                                     html: htmlToSend
     

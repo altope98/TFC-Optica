@@ -49,6 +49,14 @@ code {
     object-position: center center;
   
 }
+/* .avatar-header{
+  width: 2.3rem;
+  height:2.3rem;;
+  
+
+  border-radius: 30px;
+
+} */
 
 .dropdown-menu{
   border: 1px solid;
@@ -157,7 +165,7 @@ border-top: 2px solid black;
 /*  */
 
 
-
+/* BOTONES */
 .btn-success{
   background-color: #54B03B;
   transition: all .5s ease;
@@ -169,6 +177,63 @@ border-top: 2px solid black;
   border:2px solid #08594C;
 }
 
+.btn-danger{
+  transition: all .5s ease;
+  border:2px solid rgb(122, 0, 0);
+}
+
+.btn-success:hover{
+  background-color: rgb(228, 0, 0);
+  color: white ;
+  border:2px solid rgb(194, 61, 0);
+}
+
+.btnfacebook{
+  border-radius: 10px;
+  background-color: #4267b2;
+  color:white;
+  margin: 0.5rem;
+  padding: 0.3rem;
+}
+
+.btnfacebook:hover{
+  background-color: #2f539d;
+}
+
+.btnfacebook img{ 
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: rgba(9, 30, 66);
+  margin: 0rem 1rem 0rem 1rem;
+}
+.btnfacebook p{ 
+  margin: 0rem 1rem 0rem 0rem;
+}
+
+.btngoogle {
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin: 0.5rem;
+  padding: 0.3rem;
+}
+.btngoogle:hover{
+  background-color: #e1e1dd;
+}
+.btngoogle img{ 
+  border-radius: 10px;
+  margin: 0rem 1rem 0rem 1rem;
+}
+.btngoogle p{ 
+  margin: 0rem 1rem 0rem 0rem;
+}
+
+.botonessesion{
+  margin-top: 1rem;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/*  */
 
 /*CALENDARIO*/
 
@@ -253,6 +318,11 @@ border-top: 2px solid black;
     height: 10rem;
   
   }
+}
+@media (max-width:584px){
+.botonessesion{
+  justify-content: center;
+}
 }
 
 @media (max-width:425px){
