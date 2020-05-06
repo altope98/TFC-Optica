@@ -26,7 +26,7 @@ var readHTMLFile = function (path, callback) {
     });
 };
 
-cron.schedule('00 18 * * Monday,Tuesday,Wednesday,Thursday,Sunday', () => {
+cron.schedule('30 15 * * Monday,Tuesday,Wednesday,Thursday,Sunday', () => {
     controller.envioRecordatorio();
 }); 
 
@@ -187,6 +187,7 @@ var controller = {
         fecha = fecha.format('DD/MM/YYYY');
         let citas = [];
         let status;
+
         db.collection('citas').where('fecha', '==', fecha).get()
             .then(snapshot => {
                 if (snapshot.empty) {
@@ -266,3 +267,5 @@ var controller = {
 }
 
 module.exports = controller
+
+

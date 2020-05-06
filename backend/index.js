@@ -31,10 +31,16 @@ const db= firebase.initializeApp(firebaseConfig).firestore();
 
 module.exports= db; 
 
-
 var app= require('./app');
 
-const PORT = process.env.PORT || 5000   // 3000
+
+const wakeUpDyno = require("./wakeUpDyno");
+const URL ="https://api-react-optica.herokuapp.com/api";
+
+
+
+const PORT = process.env.PORT || 5000  //5000  // 3000
 app.listen(PORT, ()=>{
+  wakeUpDyno(URL);
   console.log('servidor corriendo en '+PORT);
 });

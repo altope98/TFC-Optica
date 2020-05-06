@@ -18,7 +18,7 @@ var cita = {
 }
 
 
-cron.schedule('0 00 */1 * * *', () => {
+cron.schedule('*/45 * * * *', () => {
     controller.comprobadorAntiguedad();
 });
 

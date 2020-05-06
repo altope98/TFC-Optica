@@ -45,6 +45,7 @@ class Login extends Component {
                 email: current.email,
                 telefono: "",
                 dni: "",
+                imagen:"https://firebasestorage.googleapis.com/v0/b/proyecto-consulta-firebase.appspot.com/o/default-user-image.png?alt=media&token=6c3d7402-c876-48ff-b1e1-5d1a0b6cab66"
             }
             axios.post(this.url + 'user2', user).then((response)=>{
                 if(response.data){
@@ -68,6 +69,7 @@ class Login extends Component {
                 email: current.email,
                 telefono: "",
                 dni: "",
+                imagen: "https://firebasestorage.googleapis.com/v0/b/proyecto-consulta-firebase.appspot.com/o/default-user-image.png?alt=media&token=6c3d7402-c876-48ff-b1e1-5d1a0b6cab66"
             }
             axios.post(this.url + 'user2', user).then((response)=>{
                 if(response.data){
