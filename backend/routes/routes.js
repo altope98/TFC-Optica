@@ -4,6 +4,7 @@ var express=require('express');
 var UserController=require('../controllers/user');
 var CitasController=require('../controllers/citas');
 var EmailController=require('../emails/email');
+var CarritoController=require('../controllers/carrito');
 
 
 var router= express.Router();
@@ -30,8 +31,9 @@ router.post('/email/cambiocita', EmailController.cambioCita );
 router.post('/email/recordatorio', EmailController.recordatorioCita );
 
 
-
-
+router.post('/carrito/agregar', CarritoController.agregarItem );
+router.delete('/carrito/eliminar', CarritoController.quitarItem );
+router.get('/carrito', CarritoController.mostrarCarrito);
 
 /* router.post('/push', User.notificacion); */
 /*  router.post('/upload-image/:id?', MainController.upload); */

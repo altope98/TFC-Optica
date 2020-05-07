@@ -3,6 +3,7 @@
 //CARGA DE MODULOS DE NODE PARA CREAR SERVER
 var express= require('express');
 var bodyParser= require('body-parser');
+var session=require('express-session');
 
 
 //EJECUTAR EXPRESS (HTTP)
@@ -23,6 +24,12 @@ app.use((req, res, next) => {
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
 });
+
+app.use(session({
+    secret:'carrito',
+    resave: false,
+    saveUninitialized: false
+}));
 
 
 //PREFIJOS A RUTAS  //CARGADO DE RUTAS
