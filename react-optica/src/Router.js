@@ -47,7 +47,7 @@ class Router extends Component {
                         <Route exact path="/tope-vision/login" component={Login} />
                         <Route exact path="/tope-vision/register" component={Register} />
                         <Route exact path="/tope-vision/servicios" component={Servicios} />
-                        <Route exact path="/tope-vision/tienda" component={Tienda} />
+                        <Route exact path="/tope-vision/tienda/:id?" component={Tienda} />
                         <Route exact path="/tope-vision/miperfil/:id" component={PerfilUsuario}/>
                         <Route exact path="/tope-vision/adminperfil/:adminid" component={PerfilAdmin}/>
                         <Route exact path="/tope-vision/citas" component={Citas} />
@@ -71,7 +71,7 @@ class Router extends Component {
                         }/>
                         
 
-                         <Route component={Error} />
+                        <Route component={Error} />
                     </Switch>
 
                     

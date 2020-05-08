@@ -322,7 +322,7 @@ var controller = {
 
         console.log(requestedUser)
 
-         db.collection('users').doc(request.body.userId).update(requestedUser).then(()=>{
+        db.collection('users').doc(request.body.userId).update(requestedUser).then(()=>{
             return response.status(200).send({
                 status: 'success',
                 message: "Usuario actualizado",
@@ -348,7 +348,7 @@ var controller = {
                                     message: "Usuario eliminado",
                                 });
                             });
-                          });
+                        });
                     });  
         });
     },

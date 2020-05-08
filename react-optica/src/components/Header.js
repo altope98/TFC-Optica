@@ -46,11 +46,11 @@ class Header extends Component {
                 user: {},
                 userId: null,
                 redirect:true
-             })
+            })
         }).catch((e)=>{
             alert(e.message)
-          });
-          
+        });
+        
     }
 
 
@@ -85,7 +85,7 @@ class Header extends Component {
                                 <NavLink to="/tope-vision/servicios" activeClassName="active">Servicios</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/tope-vision/tienda" activeClassName="active">Tienda</NavLink>
+                                <NavLink to={"/tope-vision/tienda/"+this.state.userId }activeClassName="active">Tienda</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink to="/tope-vision/citas" activeClassName="active">Citas</NavLink>
@@ -113,9 +113,9 @@ class Header extends Component {
                                             {this.state.user.admin === false 
 
                                                 ?<React.Fragment>
-                                                 <Link className="dropdown-item" to={"/tope-vision/miperfil/" + this.state.userId} >Mi perfil</Link>
+                                                <Link className="dropdown-item" to={"/tope-vision/miperfil/" + this.state.userId} >Mi perfil</Link>
                                                  {/* <Link className="dropdown-item" to={"/tope-vision/mispedidos/" + this.state.userId} activeClassName="active">Mis pedidos</Link> */}
-                                                 </React.Fragment>
+                                                </React.Fragment>
                                                 : <React.Fragment>
                                                 <Link className="dropdown-item" to={"/tope-vision/adminperfil/" + this.state.userId} >Administracion</Link>
                                                 
