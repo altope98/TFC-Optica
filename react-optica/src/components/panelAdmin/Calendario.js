@@ -168,10 +168,7 @@ class Calendario extends Component {
                                 <h6 className="m-1 ">Telefono: {this.citaaux[0].cita.user.telefono}</h6>
                                 <h6 className="m-1 ">Email: {this.citaaux[0].cita.user.email}</h6>
                             </div>
-
-
                             <div className="infoactualizarcita mt-3">
-
                                 {/* INPUT DATE Y HORA Y BOTON PARA ACTUALIZAR  */}
                                 <form className="col-12" onSubmit={(e) => this.updateCita(e, this.citaaux[0].citaId)}>
                                     <div className="row">
@@ -194,11 +191,6 @@ class Calendario extends Component {
                                     </div>
                                 
                             </div>
-
-
-
-                            
-
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.cerradoEvento}>

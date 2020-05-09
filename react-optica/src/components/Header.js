@@ -75,7 +75,7 @@ class Header extends Component {
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
@@ -92,24 +92,24 @@ class Header extends Component {
                             </li>
                         </ul>
                         <div className="dropdown-divider "></div>
-                        <ul class="navbar-nav navbar-right">
+                        <ul className="navbar-nav navbar-right">
 
                             {this.state.identity === false || this.state.identity === null
                                 ? <React.Fragment>
-                                    <li class="nav-item">
+                                    <li className="nav-item">
                                         <NavLink to="/tope-vision/register" activeClassName="active">Registro</NavLink>
                                     </li>
-                                    <li class="nav-item">
+                                    <li className="nav-item">
                                         <NavLink to="/tope-vision/login" activeClassName="active">Iniciar sesion</NavLink>
                                     </li>
                                 </React.Fragment>
                                 : <React.Fragment>
-                                    <li class="nav-item dropdown" >
-                                        <p class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <li className="nav-item dropdown" >
+                                        <p className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {this.state.user.nombre + ' ' + this.state.user.apellidos}
                                         </p>
 
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                             {this.state.user.admin === false 
 
                                                 ?<React.Fragment>

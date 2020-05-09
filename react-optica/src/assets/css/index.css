@@ -142,6 +142,7 @@ border-top: 2px solid black;
 #clientes .card{
   width: 13rem;
   margin: 1rem;
+
   
 }
 
@@ -157,6 +158,10 @@ border-top: 2px solid black;
   flex-flow: row wrap ;
   margin: auto auto;
   width: auto;
+}
+
+.img-item{
+  width: 30%;
 }
 
 

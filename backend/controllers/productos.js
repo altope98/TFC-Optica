@@ -37,7 +37,6 @@ var controller={
         let categoria= request.body.categoria;
         let genero= request.body.genero;
         let edad= request.body.edad;
-        console.log(categoria, genero, edad)
         let productos=[];
 
         db.collection('productos').where('categoria', '==', categoria).where('tamaño', '==', edad).where('genero', '==', genero).get()

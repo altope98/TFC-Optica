@@ -48,6 +48,7 @@ class Router extends Component {
                         <Route exact path="/tope-vision/register" component={Register} />
                         <Route exact path="/tope-vision/servicios" component={Servicios} />
                         <Route exact path="/tope-vision/tienda/:id?" component={Tienda} />
+                        {/* <Route exact path="/tope-vision/carrito" component={Carrito} /> */}
                         <Route exact path="/tope-vision/miperfil/:id" component={PerfilUsuario}/>
                         <Route exact path="/tope-vision/adminperfil/:adminid" component={PerfilAdmin}/>
                         <Route exact path="/tope-vision/citas" component={Citas} />
