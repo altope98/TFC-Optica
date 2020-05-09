@@ -17,7 +17,7 @@ code {
 
 .navbar-brand{
   width: 12%;
- 
+
 }
 .navbar-nav li a{
   padding: 1rem;
@@ -130,8 +130,8 @@ border-top: 2px solid black;
 #clientes{
   display: flex;
   flex-flow: row wrap ;
-   margin: auto auto;
-   width: auto;
+  margin: auto auto;
+  width: auto;
 
 
 }
@@ -148,6 +148,28 @@ border-top: 2px solid black;
 #clientes .card img{
   width: 100%;
 }
+
+/*  */
+
+/* TIENDA */
+#productos{
+  display: flex;
+  flex-flow: row wrap ;
+  margin: auto auto;
+  width: auto;
+}
+
+
+#productos .card{
+  width: 13rem;
+  margin: 1rem;
+  
+}
+
+#productos .card img{
+  width: 100%;
+}
+
 
 /*  */
 

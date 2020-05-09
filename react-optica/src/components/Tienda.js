@@ -9,9 +9,6 @@ class Tienda extends Component {
 
     url = Global.url
     userId = null;
-    categoriaRef = React.createRef();
-    generoRef = React.createRef();
-    edadRef = React.createRef();
 
     state = {
         identity: true,
@@ -21,8 +18,6 @@ class Tienda extends Component {
         categoria:'gafas',
         edad:'adulto',
         genero:'masculino',
-        generoSelected:'masculino',
-        edadSelected:'adulto'
     }
 
     componentWillMount() {
@@ -47,33 +42,23 @@ class Tienda extends Component {
     }
 
 
-    changeState=()=>{
+    onCategoriaChange=(event)=>{
         this.setState({
-            categoria: this.categoriaRef.current.selectedOptions[0].value,
-            genero: this.state.generoSelected,
-            edad:this.state.edadSelected
-        }); 
-        console.log(this.state);
-        this.getProductos(); 
+            categoria: event.target.value,
+        }, this.getProductos);
+        
     }
 
     onEdadChange=(event)=>{
         this.setState({
-            edadSelected: event.target.value
-        })
-        console.log(event.target.value)
-
-        this.changeState();
+            edad: event.target.value
+        }, this.getProductos);
     }
 
     onGeneroChange=(event)=>{
         this.setState({
-            generoSelected: event.target.value
-        })
-
-        console.log(event.target.value)
-
-        this.changeState();
+            genero: event.target.value
+        }, this.getProductos);
     }
 
     componentDidMount(){
@@ -85,7 +70,7 @@ class Tienda extends Component {
         axios.get(this.url + 'getuser/' + id).then((response) => {
             if (response.data.status === 'success') {
                 this.setState({
-                    user: response.data.user,
+                    user: response.data.user
                 })
             }
         })
@@ -100,6 +85,12 @@ class Tienda extends Component {
             if (response.data.status === 'success') {
                 this.setState({
                     productos: response.data.productos,
+                    status:'success'
+                })
+            }else{
+                this.setState({
+                    productos: [],
+                    status:'error'
                 })
             }
         })
@@ -126,38 +117,32 @@ class Tienda extends Component {
                     </div>
                 );
             });
+        
 
-        } else if (this.state.productos.length === undefined && this.state.status === 'error') {
-            listProducts = () => {
-                return (
-
-                    <h1 className="mt-5 text-center">No hay productos para mostrar</h1>
-
-                );
-            }
+        } else if (   this.state.status === 'error') {
+            listProducts =  <h1 className="mt-5 text-center">No hay productos para mostrar</h1>
+                
+            
 
         } else {
-            listProducts = () => {
-                return (
-
+            listProducts = 
                     <h1 className="mt-5 text-center">Cargando...</h1>
+                    
 
-                );
-
-            }
+            
         }
 
-        if (this.state.identity === false) {
+        /* if (this.state.identity === false) {
             return (
                 <Redirect to="/tope-vision/login" />
             )
-        } else {
+        } else { */
             return (
-                <div id="tienda" className="col-12 mt-3">
-                    <div id="filtros" className="col-2">
+                <div id="tienda" className="row mt-3">
+                    <div id="filtros" className="col-2 ml-4">
                         <div class="form-group text-left m-2">
                             <label for="categoria">Categorias: </label>
-                            <select class="form-control" name="categoria" ref={this.categoriaRef} onChange={this.changeState}>
+                            <select class="form-control" name="categoria"  onChange={this.onCategoriaChange}>
                                 <option selected value="gafas">Gafas de sol</option>
                                 <option value="lentillas">Lentillas</option>
                                 <option value="limpieza">Limpieza y accesorios</option>
@@ -167,11 +152,11 @@ class Tienda extends Component {
                         <div className="genero text-left m-2">
                             <label htmlFor="genero" >Genero: </label>
                             <div class="form-check">
-                                <input type="radio" checked={this.state.generoSelected === 'masculino'}  class="form-check-input" name="masculino" value="masculino"  onChange={this.onGeneroChange} />
+                                <input type="radio" checked={this.state.genero === 'masculino'}  class="form-check-input" name="masculino" value="masculino"  onChange={this.onGeneroChange} />
                                 <label class="form-check-label" for="masculino">Hombre</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" class="form-check-input" checked={this.state.generoSelected === 'femenino'} name="femenino" value="femenino"  onChange={this.onGeneroChange} />
+                                <input type="radio" class="form-check-input" checked={this.state.genero === 'femenino'} name="femenino" value="femenino"  onChange={this.onGeneroChange} />
                                 <label class="form-check-label" for="femenino">Mujer</label>
 
                             </div>
@@ -179,22 +164,22 @@ class Tienda extends Component {
                         <div className="edad text-left m-2">
                             <label htmlFor="edad" >Edad: </label>
                             <div class="form-check">
-                                <input type="radio" checked={this.state.edadSelected === 'adulto'}  class="form-check-input" name="adulto" value="adulto" onChange={this.onEdadChange} />
+                                <input type="radio" checked={this.state.edad === 'adulto'}  class="form-check-input" name="adulto" value="adulto" onChange={this.onEdadChange} />
                                 <label class="form-check-label" for="adulto">Adulto</label>
                             </div>
                             <div className="form-check">
-                                <input type="radio" checked={this.state.edadSelected === 'infantil'} class="form-check-input" name="infantil" value="infantil" onChange={this.onEdadChange} />
+                                <input type="radio" checked={this.state.edad === 'infantil'} class="form-check-input" name="infantil" value="infantil" onChange={this.onEdadChange} />
                                 <label class="form-check-label" for="infantil">Infantil</label>
 
                             </div>
                         </div>
                     </div>
-                    <div id="productos" className="col-8">
+                    <div id="productos" className="col-8 m-2">
                         {listProducts}
                     </div>
 
 
-                    <div id="carrito" className="col-2">
+                    <div id="carrito" className="col-2 m-2">
 
 
                     </div>
@@ -203,7 +188,7 @@ class Tienda extends Component {
             );
         }
 
-    }
+    /* } */
 }
 
 export default Tienda;
