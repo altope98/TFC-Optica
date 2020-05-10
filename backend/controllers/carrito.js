@@ -21,10 +21,7 @@ var controller= {
     },
 
     agregarItem:(request, response) =>{
-        if (request.session.carrito == undefined) {
-            request.session.carrito = [];
-        }
-        let carrito=request.session.carrito;
+        let carrito=controller.iniciarCarrito(request);
         let id = request.body.item_id;
         db.collection('productos').doc(id).get()
             .then(doc => {

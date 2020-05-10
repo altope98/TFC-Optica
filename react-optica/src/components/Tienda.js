@@ -130,7 +130,7 @@ class Tienda extends Component {
     }
 
     agregarItem=(id)=>{
-        axios.post(this.url + 'carrito/agregar', { item_id: id} , {withCredentials: 'include'} ).then((response) => {
+        axios.post(this.url + 'carrito/agregar', { item_id: id}  ).then((response) => {
             if (response.data.status === 'success') {
                 this.setState({
                     carrito: response.data.carrito
