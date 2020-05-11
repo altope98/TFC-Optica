@@ -241,7 +241,7 @@ class Tienda extends Component {
                             <span className="numeroitems">{this.state.carrito.length} </span>
                             
                         }
-                        <img src={carrito} alt="icono-carrito" />
+                        <img src={"../"+carrito} alt="icono-carrito" />
                             Ver Carrito
                         </Link>
 

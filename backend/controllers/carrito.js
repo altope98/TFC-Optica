@@ -21,8 +21,10 @@ var controller= {
     },
 
     agregarItem:(request, response) =>{
+        let sid= request.sessionID;
         let carrito=controller.iniciarCarrito(request);
         let id = request.body.item_id;
+        console.log(sid);
         db.collection('productos').doc(id).get()
             .then(doc => {
                 if (!doc.exists) {
@@ -31,7 +33,6 @@ var controller= {
                         message: 'No existe producto'
                     });
                 }else{
-
                     let pos=controller.verificar(carrito, id);
                     if(pos==-1){
                         let item={
@@ -49,7 +50,6 @@ var controller= {
                         item.precio_total=item.cantidad*item.precio;
                         carrito[pos]=item;
                     }
-
                     request.session.carrito=carrito;
                     return response.status(200).send({
                         status: 'success',
