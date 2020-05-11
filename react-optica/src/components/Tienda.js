@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { auth } from '../db';
-import { Redirect, Link } from 'react-router-dom';
+import { /* Redirect, */ Link } from 'react-router-dom';
 import axios from "axios";
 import Global from "../Global";
 import swal from 'sweetalert';
 import carrito from '../assets/images/carrito.svg'
 import { Modal, Button } from 'react-bootstrap'
-/* axios.defaults.withCredentials = true */
+
 
 class Tienda extends Component {
 
@@ -89,7 +89,6 @@ class Tienda extends Component {
             }
         })
 
-        console.log(this.state.carrito);
     }
 
     getProductos = () => {
@@ -237,7 +236,6 @@ class Tienda extends Component {
 
 
                 <div id="carrito" className="col-2 m-2">
-                    {/* <button>asvdavdsvds</button> */}
                     <Link to={{ pathname: "/tope-vision/carrito", state: { userId: this.userId, carrito: this.state.carrito } }} className="ircarrito btn btn-primary" >
                         {this.state.carrito !== undefined  &&
                             <span className="numeroitems">{this.state.carrito.length} </span>

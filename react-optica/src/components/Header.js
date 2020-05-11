@@ -129,8 +129,6 @@ class Header extends Component {
                                 }
                                 
                             </ul>
-
-                            {/*AÑADIR PARTE DEL USUARIO Y BOTONES DE INICIAR SESION O REGISTRO*/ }
                         
 
             </div >
