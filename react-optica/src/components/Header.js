@@ -47,6 +47,9 @@ class Header extends Component {
                 userId: null,
                 redirect:true
             })
+
+            axios.post(this.url + 'carrito/cerrar');
+
         }).catch((e)=>{
             alert(e.message)
         });
@@ -63,14 +66,14 @@ class Header extends Component {
                 
             {this.state.redirect===true &&
                             
-                <Redirect to="/tope-vision/signout"/>
+                <Redirect to="/signout"/>
             }
             
 
             <header id="header" className="container-fluid">
                 <nav className="navbar navbar-expand-lg navbar-light" id="barra" >
                     <div className="navbar-brand">
-                        <NavLink to="/tope-vision/home" activeClassName="active"><img src={logo} className="app-logo" id="logo" alt="Logotipo" /></NavLink>
+                        <NavLink to="/" activeClassName="active"><img src={logo} className="app-logo" id="logo" alt="Logotipo" /></NavLink>
                     </div>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -79,16 +82,16 @@ class Header extends Component {
 
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <NavLink to="/tope-vision/home" activeClassName="active">Inicio</NavLink>
+                                <NavLink to="/" activeClassName="active">Inicio</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/tope-vision/servicios" activeClassName="active">Servicios</NavLink>
+                                <NavLink to="/servicios" activeClassName="active">Servicios</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={"/tope-vision/tienda/"+this.state.userId }activeClassName="active">Tienda</NavLink>
+                                <NavLink to={"/tienda/"+this.state.userId }activeClassName="active">Tienda</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/tope-vision/citas" activeClassName="active">Citas</NavLink>
+                                <NavLink to="/citas" activeClassName="active">Citas</NavLink>
                             </li>
                         </ul>
                         <div className="dropdown-divider "></div>
@@ -97,10 +100,10 @@ class Header extends Component {
                             {this.state.identity === false || this.state.identity === null
                                 ? <React.Fragment>
                                     <li className="nav-item">
-                                        <NavLink to="/tope-vision/register" activeClassName="active">Registro</NavLink>
+                                        <NavLink to="/register" activeClassName="active">Registro</NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <NavLink to="/tope-vision/login" activeClassName="active">Iniciar sesion</NavLink>
+                                        <NavLink to="/login" activeClassName="active">Iniciar sesion</NavLink>
                                     </li>
                                 </React.Fragment>
                                 : <React.Fragment>
@@ -113,11 +116,11 @@ class Header extends Component {
                                             {this.state.user.admin === false 
 
                                                 ?<React.Fragment>
-                                                <Link className="dropdown-item" to={"/tope-vision/miperfil/" + this.state.userId} >Mi perfil</Link>
-                                                 {/* <Link className="dropdown-item" to={"/tope-vision/mispedidos/" + this.state.userId} activeClassName="active">Mis pedidos</Link> */}
+                                                <Link className="dropdown-item" to={"/miperfil/" + this.state.userId} >Mi perfil</Link>
+                                                 {/* <Link className="dropdown-item" to={"/mispedidos/" + this.state.userId} activeClassName="active">Mis pedidos</Link> */}
                                                 </React.Fragment>
                                                 : <React.Fragment>
-                                                <Link className="dropdown-item" to={"/tope-vision/adminperfil/" + this.state.userId} >Administracion</Link>
+                                                <Link className="dropdown-item" to={"/adminperfil/" + this.state.userId} >Administracion</Link>
                                                 
                                                 </React.Fragment>
                                             }

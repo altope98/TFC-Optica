@@ -50,7 +50,7 @@ class UsuariosAdmin extends Component {
                             <small className="card-text">{data.user.email}</small><br />
                         </div>
                         <div class="card-footer">
-                            <Link to={"/tope-vision/adminperfil/requestuser/" + data.userId} className="btn btn-primary">Ver Perfil</Link>
+                            <Link to={"/adminperfil/requestuser/" + data.userId} className="btn btn-primary">Ver Perfil</Link>
                         </div>
                     </div>
                 )

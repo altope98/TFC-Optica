@@ -104,6 +104,15 @@ var controller= {
 
     },
 
+    cerrarCarrito:(request, response)=>{
+        request.session.destroy();
+
+        return response.status(200).send({
+            status: 'success',
+            message:'Session closed'
+        });
+    }
+
 
     
 }

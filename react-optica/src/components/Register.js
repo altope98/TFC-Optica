@@ -182,7 +182,7 @@ class Register extends Component {
     render() {
         if (this.state.status === 'success') {
             return (
-                <Redirect to="/tope-vision/login" />
+                <Redirect to="/login" />
             )
         }
         return (
