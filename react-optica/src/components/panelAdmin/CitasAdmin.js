@@ -61,6 +61,8 @@ class CitasAdmin extends Component {
                 );
                 this.forceUpdate();
 
+                axios.post(this.url+'email/confirmacita', {cita});
+
             }else{
                 console.log(response.data.error)
                 swal(

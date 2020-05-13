@@ -2,7 +2,9 @@
 
 //CARGA DE MODULOS DE NODE PARA CREAR SERVER
 var express= require('express');
+var cookieParser= require('cookie-parser')
 var bodyParser= require('body-parser');
+var session=require('express-session');
 
 
 //EJECUTAR EXPRESS (HTTP)
@@ -15,18 +17,20 @@ var clients_router= require('./routes/routes');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-//CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
+
+app.use(cookieParser());
+
+app.use(session({
+    secret:'carrito',
+    resave: false,
+    saveUninitialized: true
+}));
 
 
 //PREFIJOS A RUTAS  //CARGADO DE RUTAS
-app.use('/api',clients_router);
+app.use(clients_router);
+
+ app.use(express.static('public')); 
 
 
 //EXPORTAR MODULO

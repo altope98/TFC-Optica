@@ -13,6 +13,7 @@ import Servicios from './components/Servicios';
 import Error from './components/Error'
 import PerfilUsuario from './components/PerfilUsuario';
 import PerfilAdmin from './components/PerfilAdmin';
+import Carrito from './components/Carrito';
 
 class Router extends Component {
     state = {
@@ -42,36 +43,37 @@ class Router extends Component {
                     <Switch>
 
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/tope-vision" component={Home} />
-                        <Route exact path="/tope-vision/home" component={Home} />
-                        <Route exact path="/tope-vision/login" component={Login} />
-                        <Route exact path="/tope-vision/register" component={Register} />
-                        <Route exact path="/tope-vision/servicios" component={Servicios} />
-                        <Route exact path="/tope-vision/tienda" component={Tienda} />
-                        <Route exact path="/tope-vision/miperfil/:id" component={PerfilUsuario}/>
-                        <Route exact path="/tope-vision/adminperfil/:adminid" component={PerfilAdmin}/>
-                        <Route exact path="/tope-vision/citas" component={Citas} />
-                        <Route exact path="/tope-vision/logged" render={
+                        {/* <Route exact path="/tope-vision" component={Home} /> */}
+                        <Route exact path="/home" component={Home} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/register" component={Register} />
+                        <Route exact path="/servicios" component={Servicios} />
+                        <Route exact path="/tienda/:id?" component={Tienda} />
+                        <Route exact path="/carrito" component={Carrito} />
+                        <Route exact path="/miperfil/:id" component={PerfilUsuario}/>
+                        <Route exact path="/adminperfil/:adminid" component={PerfilAdmin}/>
+                        <Route exact path="/citas" component={Citas} />
+                        <Route exact path="/logged" render={
                             ()=>{   
                                     this.logged();
                                     return(
-                                        <Redirect to="/tope-vision/home"/>
+                                        <Redirect to="/"/>
                                     )
 
                             }
                         }/>
-                        <Route exact path="/tope-vision/signout" render={
+                        <Route exact path="/signout" render={
                             ()=>{   
                                     this.signout();
                                     return(
-                                        <Redirect to="/tope-vision/home"/>
+                                        <Redirect to="/"/>
                                     )
 
                             }
                         }/>
                         
 
-                         <Route component={Error} />
+                        <Route component={Error} />
                     </Switch>
 
                     

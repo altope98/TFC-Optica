@@ -10,8 +10,9 @@ admin.initializeApp({
 });
 
 const messaging= admin.messaging();
-
+const auth=admin.auth();
 module.exports= messaging; 
+module.exports=auth;
  
 
 var firebase=require("firebase");
@@ -30,10 +31,16 @@ const db= firebase.initializeApp(firebaseConfig).firestore();
 
 module.exports= db; 
 
-
 var app= require('./app');
 
-const PORT = process.env.PORT || 5000// 3000
+
+const wakeUpDyno = require("./wakeUpDyno");
+const URL ="https://react-optica.herokuapp.com";
+
+
+
+const PORT = process.env.PORT || 5000  //5000  // 3000
 app.listen(PORT, ()=>{
+  wakeUpDyno(URL);
   console.log('servidor corriendo en '+PORT);
 });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import Global from "../../Global"
 import { Link } from 'react-router-dom';
-import default_user from '../../assets/images/default-user-image.png'
+
 
 
 class UsuariosAdmin extends Component {
@@ -44,14 +44,14 @@ class UsuariosAdmin extends Component {
                 return (
 
                     <div key={i} id={data.userId} className="card" >
-                        <img className="card-img-top" src={default_user} alt="Cardcap" />
+                        <img className="card-img-top" src={data.user.imagen} alt="Cardcap" />
                         <div className="card-body">
                             <h5 className="card-title ">{data.user.nombre + ' ' + data.user.apellidos}</h5>
                             <small className="card-text">{data.user.email}</small><br />
                         </div>
                         <div class="card-footer">
-                            <Link to={"/tope-vision/adminperfil/requestuser/" + data.userId} className="btn btn-primary">Ver Perfil</Link>
-                         </div>
+                            <Link to={"/adminperfil/requestuser/" + data.userId} className="btn btn-primary">Ver Perfil</Link>
+                        </div>
                     </div>
                 )
             })

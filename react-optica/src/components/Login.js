@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-/* import axios from "axios"; */
+import axios from "axios";
 import Global from "../Global";
 import SimpleReactValidator from 'simple-react-validator';
-/* import swal from 'sweetalert'; */
-import {auth} from '../db'
+import { auth } from '../db'
+import firebase from 'firebase';
+
+
 
 class Login extends Component {
 
@@ -14,13 +16,11 @@ class Login extends Component {
     url = Global.url;
 
     state = {
-        email:null,
-        password:null,
+        email: null,
+        password: null,
         status: null,
+        user: {},
     };
-
-
-
     componentWillMount() {
         this.validator = new SimpleReactValidator({
             messages: {
@@ -33,13 +33,60 @@ class Login extends Component {
         });
     }
 
+    inicioGoogle = () => {
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        auth.signInWithPopup(provider).then((result) => {
+            var current = result.user;
+            let name = current.displayName.split(" ");
+            let user = {
+                nombre: name[0],
+                apellidos: name[1],
+                email: current.email,
+                telefono: "",
+                dni: "",
+                imagen:"https://firebasestorage.googleapis.com/v0/b/proyecto-consulta-firebase.appspot.com/o/default-user-image.png?alt=media&token=6c3d7402-c876-48ff-b1e1-5d1a0b6cab66"
+            }
+            axios.post(this.url + 'user2', user).then((response)=>{
+                if(response.data){
+                    this.setState({
+                        status: 'success'
+                    })
+                }
+            });
+        })
+    }
+
+    inicioFacebook = () => {
+        var provider = new firebase.auth.FacebookAuthProvider();
+
+        auth.signInWithPopup(provider).then((result) => {
+            var current = result.user;
+            let name = current.displayName.split(" ");
+            let user = {
+                nombre: name[0],
+                apellidos: name[1],
+                email: current.email,
+                telefono: "",
+                dni: "",
+                imagen: "https://firebasestorage.googleapis.com/v0/b/proyecto-consulta-firebase.appspot.com/o/default-user-image.png?alt=media&token=6c3d7402-c876-48ff-b1e1-5d1a0b6cab66"
+            }
+            axios.post(this.url + 'user2', user).then((response)=>{
+                if(response.data){
+                    this.setState({
+                        status: 'success'
+                    })
+                }
+            });
+            
+        })
+    }
+
     changeState = () => {
         this.setState({
-            email:this.emailRef.current.value,
-            password:this.passwordRef.current.value
+            email: this.emailRef.current.value,
+            password: this.passwordRef.current.value
         });
-
-        
     }
 
     recibirFormulario = (event) => {
@@ -50,12 +97,12 @@ class Login extends Component {
         if (this.validator.allValid()) {
             auth.signInWithEmailAndPassword(this.state.email, this.state.password).then(() => {
                 this.setState({
-                    password:null,
+                    password: null,
                     status: 'success'
                 })
-              }).catch((err) => {
+            }).catch((err) => {
                 alert(err.message)
-              })
+            })
         } else {
             this.validator.showMessages();
             this.forceUpdate();
@@ -70,12 +117,14 @@ class Login extends Component {
     render() {
         if (this.state.status === 'success') {
             return (
-                <Redirect to="/tope-vision/logged" />
+                <Redirect to="/logged" />
             )
         }
+
         return (
 
-            <div id="login"  className=" col-12">
+            <div id="login" className=" col-12">
+
                 <h2 className="text-center p-3 text-md-left">
                     Iniciar sesion
                 </h2>
@@ -96,9 +145,16 @@ class Login extends Component {
                     <div className="clearfix"></div>
                     <input type="submit" value="Iniciar sesion" class="btn btn-success" />
                 </form>
+
+                <div className="botonessesion">
+                    <button className="btngoogle row" onClick={() => this.inicioGoogle()}><img src="https://www.gstatic.com/mobilesdk/160512_mobilesdk/auth_service_google.svg" alt="google-boton" /> <p>Inicia sesion con Google</p></button>
+                    <button className="btnfacebook row" onClick={() => this.inicioFacebook()}><img src="https://www.gstatic.com/mobilesdk/160409_mobilesdk/images/auth_service_facebook.svg" alt="facebook-boton" /> <p>Inicia sesion con Facebook</p></button>
+
+                </div>
             </div>
         );
+
     }
 }
- 
+
 export default Login;

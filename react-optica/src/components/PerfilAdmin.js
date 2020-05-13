@@ -69,48 +69,48 @@ class PerfilAdmin extends Component {
                         <hr />
                         <BrowserRouter>
                             <div id="panel">
-                                <Redirect exact from="/" to={"/tope-vision/adminperfil/" + this.userId + "/clientes"} />
+                                <Redirect exact from="/" to={"/adminperfil/" + this.userId + "/clientes"} />
 
 
                                 <MDBNav className="nav-tabs mt-5">
                                     <MDBNavItem>
-                                        <MDBNavLink to={"/tope-vision/adminperfil/" + this.userId + "/clientes"}>Clientes</MDBNavLink>
+                                        <MDBNavLink to={"/adminperfil/" + this.userId + "/clientes"}>Clientes</MDBNavLink>
                                     </MDBNavItem>
                                     <MDBNavItem>
-                                        <MDBNavLink to={"/tope-vision/adminperfil/" + this.userId + "/citas"}>Citas</MDBNavLink>
+                                        <MDBNavLink to={"/adminperfil/" + this.userId + "/citas"}>Citas</MDBNavLink>
                                     </MDBNavItem>
                                     <MDBNavItem>
-                                        <MDBNavLink to={"/tope-vision/adminperfil/" + this.userId + "/calendario"}>Calendario</MDBNavLink>
+                                        <MDBNavLink to={"/adminperfil/" + this.userId + "/calendario"}>Calendario</MDBNavLink>
                                     </MDBNavItem>
                                     {/* <MDBNavItem>
-                                        <MDBNavLink to={"/tope-vision/adminperfil/" + this.userId + "/pedidos"}>Pedidos</MDBNavLink>
+                                        <MDBNavLink to={"/adminperfil/" + this.userId + "/pedidos"}>Pedidos</MDBNavLink>
                                     </MDBNavItem>  */}
                                 </MDBNav>
 
 
                                 <Switch>
 
-                                    <Route path={"/tope-vision/adminperfil/" + this.userId + "/clientes"} >
+                                    <Route path={"/adminperfil/" + this.userId + "/clientes"} >
                                         <UsuariosAdmin />
                                     </Route>
-                                    <Route path={"/tope-vision/adminperfil/" + this.userId + "/citas"} >
+                                    <Route path={"/adminperfil/" + this.userId + "/citas"} >
                                         <CitasAdmin />
                                     </Route>
 
-                                    <Route path={"/tope-vision/adminperfil/" + this.userId + "/calendario"} >
+                                    <Route path={"/adminperfil/" + this.userId + "/calendario"} >
                                         <Calendario />
                                     </Route>
-                                    {/* <Route path={"/tope-vision/adminperfil/" + this.userId + "/pedidos"} >
+                                    {/* <Route path={"/adminperfil/" + this.userId + "/pedidos"} >
                                         <PedidosAdmin />
                                     </Route> */}
-                                    <Route exact path="/tope-vision/perfil/:id/:admin" component={PerfilUsuario}/>
-                                    <Route path={"/tope-vision/adminperfil/requestuser/:id"}
+                                    <Route exact path="/perfil/:id/:admin" component={PerfilUsuario}/>
+                                    <Route path={"/adminperfil/requestuser/:id"}
                                         render={
                                             (props) => {
                                                 var userId = props.match.params.id;
                                                 var admin=true;
                                                 return (
-                                                    <Redirect to={'/tope-vision/perfil/' + userId + '/'+admin} />
+                                                    <Redirect to={'/perfil/' + userId + '/'+admin} />
                                                 )
                                             }
                                         }
@@ -124,7 +124,7 @@ class PerfilAdmin extends Component {
 
                     </React.Fragment>
                     : <React.Fragment>
-                        <Redirect to="/tope-vision/login" />
+                        <Redirect to="/login" />
                     </React.Fragment>
                 }
 
