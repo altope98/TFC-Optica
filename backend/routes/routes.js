@@ -33,7 +33,8 @@ router.post('/email/recordatorio', EmailController.recordatorioCita );
 
 
 router.post('/carrito/agregar', CarritoController.agregarItem );
-router.delete('/carrito/eliminar', CarritoController.quitarItem );
+router.post('/carrito/quitar', CarritoController.quitarItem );
+router.post('/carrito/eliminar', CarritoController.eliminarItem );
 router.post('/carrito/cerrar', CarritoController.cerrarCarrito);
 router.get('/carrito', CarritoController.mostrarCarrito);
 

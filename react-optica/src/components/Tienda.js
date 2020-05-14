@@ -35,16 +35,18 @@ class Tienda extends Component {
                 this.setState({
                     identity: false
                 });
+            }else{
+                axios.get(this.url + 'getemail/' + this.userId).then((response) => {
+                    if (response.data.status === 'success' && response.data.email === auth.currentUser.email) {
+                        this.getUser(this.userId);
+                    } else {
+                        this.setState({
+                            identity: false
+                        });
+                    }
+                })
             }
-            axios.get(this.url + 'getemail/' + this.userId).then((response) => {
-                if (response.data.status === 'success' && response.data.email === auth.currentUser.email) {
-                    this.getUser(this.userId);
-                } else {
-                    this.setState({
-                        identity: false
-                    });
-                }
-            })
+            
         }
     }
 
@@ -92,8 +94,6 @@ class Tienda extends Component {
                 })
             }
         })
-
-        console.log(this.state.carrito);
     }
 
     getProductos = () => {
@@ -145,7 +145,6 @@ class Tienda extends Component {
                     'El producto se ha añadido al carrito correctamente',
                     'success'
                 );
-                console.log(this.state.carrito)
 
             } else {
                 this.cerradoEvento();
@@ -167,7 +166,7 @@ class Tienda extends Component {
 
                 return (
 
-                    <div key={i} id={data.productId} className="card" >
+                    <div key={i} className="card" >
                         <img className="card-img-top" src={data.product.imagen} alt="Cardcap" />
                         <div className="card-body pt-0 pb-0">
                             <h4 className="card-title ">{data.product.nombre}</h4>
@@ -193,11 +192,11 @@ class Tienda extends Component {
 
         }
 
-        if (this.state.identity === false) {
+       /*  if (this.state.identity === false) {
             return (
                 <Redirect to="/login" />
             )
-        } else {
+        } else { */
             return (
                 <div id="tienda" className="container-fluid mt-3">
                     <div className="row">
@@ -240,18 +239,16 @@ class Tienda extends Component {
                             {listProducts}
                         </div>
 
-
-                        <div id="carrito" className="col-2 m-2">
-                            <Link to={{ pathname: "/carrito", state: { userId: this.userId, carrito: this.state.carrito } }} className="ircarrito btn btn-primary" >
-                                {this.state.carrito !== undefined &&
-                                    <span className="numeroitems">{this.state.carrito.length} </span>
-
-                                }
-                                <img src={"../" + carrito} alt="icono-carrito" />
-                            Ver Carrito
+                        {this.state.carrito !== undefined &&
+                        <div id="carrito-button" className="col-2 m-2 p-3">
+                            <Link to={{ pathname: "/carrito", state: { userId: this.userId, carrito: this.state.carrito } }} className="ircarrito btn btn-primary text-center" >
+                                
+                                    <div className="numeroitems d-inline pr-2 pl-2 m-3 d-flex align-items-center justify-content-center align-self-center"><span className="m-2">{this.state.carrito.length} </span><img className="m-2" src={"../" + carrito} alt="icono-carrito" /></div>
+                                    <p className="mb-2">Ver Carrito</p>
                         </Link>
 
                         </div>
+                        }
 
 
 
@@ -299,7 +296,7 @@ class Tienda extends Component {
             );
         }
 
-    }
+    /* } */
 }
 
 export default Tienda;

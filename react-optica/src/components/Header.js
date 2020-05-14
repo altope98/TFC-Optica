@@ -18,7 +18,6 @@ class Header extends Component {
     }
 
     componentDidUpdate() {
-
         if (this.props.logged===true && auth.currentUser!=null && this.state.identity === false) {
             let email = auth.currentUser.email
             axios.get(this.url + 'user/' + email).then((response) => {
@@ -35,6 +34,10 @@ class Header extends Component {
                     });
                 }
             });
+        }
+
+        if(this.state.identity===false){
+            axios.post(this.url + 'carrito/cerrar');
         }
 
     }
