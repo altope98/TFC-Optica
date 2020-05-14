@@ -12,6 +12,7 @@ class Tienda extends Component {
     url = Global.url
     userId = null;
     productaux = [];
+    loadedCarrito=false
     state = {
         identity: true,
         user: {},
@@ -89,9 +90,15 @@ class Tienda extends Component {
     getCarrito = () => {
         axios.get(this.url + 'carrito').then((response) => {
             if (response.data.status === 'success') {
-                this.setState({
-                    carrito: response.data.carrito
-                })
+                if(response.data.carrito){
+                    this.setState({
+                        carrito: response.data.carrito
+                    })
+                    this.loadedCarrito=true;
+                }else{
+                    this.loadedCarrito=false;
+                }
+                
             }
         })
     }
@@ -139,6 +146,7 @@ class Tienda extends Component {
                 this.setState({
                     carrito: response.data.carrito
                 })
+                this.loadedCarrito=true
                 this.cerradoEvento();
                 swal(
                     'Producto agregado correctamente',
@@ -192,11 +200,11 @@ class Tienda extends Component {
 
         }
 
-       /*  if (this.state.identity === false) {
+       if (this.state.identity === false) {
             return (
                 <Redirect to="/login" />
             )
-        } else { */
+        } else { 
             return (
                 <div id="tienda" className="container-fluid mt-3">
                     <div className="row">
@@ -239,7 +247,7 @@ class Tienda extends Component {
                             {listProducts}
                         </div>
 
-                        {this.state.carrito !== undefined &&
+                        {/* this.state.carrito !== undefined */ this.loadedCarrito===true &&
                         <div id="carrito-button" className="col-2 m-2 p-3">
                             <Link to={{ pathname: "/carrito", state: { userId: this.userId, carrito: this.state.carrito } }} className="ircarrito btn btn-primary text-center" >
                                 
@@ -296,7 +304,7 @@ class Tienda extends Component {
             );
         }
 
-    /* } */
+     } 
 }
 
 export default Tienda;

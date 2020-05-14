@@ -162,11 +162,11 @@ class Carrito extends Component {
                 <h1 className="mt-5 text-center">Cargando...</h1>
         }
 
-       /*  if (this.state.identity === false) {
+        if (this.state.identity === false) {
             return (
                 <Redirect to="/login" />
             )
-        } else { */
+        } else {
             return (
                 <div id="carrito" className="container-fluid mt-4">
                     <div className="row ">
@@ -190,7 +190,7 @@ class Carrito extends Component {
 
                 </div>
             );
-        /* } */
+        } 
     }
 }
 
