@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth } from '../db';
-import { Redirect, Link } from 'react-router-dom';
+import {  Redirect,  Link } from 'react-router-dom';
 import axios from "axios";
 import Global from "../Global";
 import swal from 'sweetalert';
@@ -200,7 +200,7 @@ class Tienda extends Component {
 
         }
 
-       if (this.state.identity === false) {
+        if (this.state.identity === false) {
             return (
                 <Redirect to="/login" />
             )
@@ -247,7 +247,7 @@ class Tienda extends Component {
                             {listProducts}
                         </div>
 
-                        {/* this.state.carrito !== undefined */ this.loadedCarrito===true &&
+                        {this.loadedCarrito===true &&
                         <div id="carrito-button" className="col-2 m-2 p-3">
                             <Link to={{ pathname: "/carrito", state: { userId: this.userId, carrito: this.state.carrito } }} className="ircarrito btn btn-primary text-center" >
                                 

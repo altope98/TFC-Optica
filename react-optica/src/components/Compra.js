@@ -6,23 +6,22 @@ import swal from 'sweetalert';
 import { Redirect, Link } from 'react-router-dom';
 
 
-class Carrito extends Component {
+class Compra extends Component {
     url = Global.url
     userId = null;
     loading=true;
+    errorCarrito=false;
 
     state = {
         carrito: [],
         identity: true,
         user: {},
-
     }
 
-
-    componentDidMount() {
-
+    componentDidMount(){
         this.getCarrito();
     }
+
     componentWillMount() {
         if (!auth.currentUser) {
             this.setState({
@@ -51,12 +50,17 @@ class Carrito extends Component {
 
     getCarrito=()=>{
         axios.get(this.url + 'carrito').then((response) => {
-            if (response.data.status === 'success') {
-                this.setState({
-                    carrito: response.data.carrito,
-                })
-                this.loading=false;
-            } 
+            if (response.data.status === 'success' && response.data.carrito) {
+                
+                    this.setState({
+                        carrito: response.data.carrito,
+                    })
+                    this.loading=false;
+                }else{
+                    this.loading=false;
+                    this.errorCarrito=true;
+                }
+            
         });
     }
 
@@ -68,62 +72,19 @@ class Carrito extends Component {
                     user: response.data.user
                 })
                 /* this.getCarrito(); */
-                
             }
         })
     }
 
-    agregarItem = (id) => {
-        axios.post(this.url + 'carrito/agregar', { item_id: id }).then((response) => {
-            if (response.data.status === 'success') {
-                this.setState({
-                    carrito: response.data.carrito
-                })
-            } 
 
-        });
-    }
 
-    reducirItem = (id) => {
-        axios.post(this.url + 'carrito/quitar', { item_id: id }).then((response) => {
-            if (response.data.status === 'success') {
-                this.setState({
-                    carrito: response.data.carrito
-                })
-            } 
 
-        });
-    }
-
-    eliminarItem=(id)=>{
-        axios.post(this.url + 'carrito/eliminar', { item_id: id }).then((response) => {
-            if (response.data.status === 'success') {
-                this.setState({
-                    carrito: response.data.carrito
-                })
-                swal(
-                    'Producto eliminado correctamente',
-                    'El producto se ha eliminado del carrito correctamente',
-                    'success'
-                );
-
-            } else {
-                swal(
-                    'El producto no se ha eliminado correctamente',
-                    'Ha ocurrido un error al eliminar el producto del carrito, intentelo mas tarde',
-                    'error'
-                );
-            }
-
-        });
-    }
-
-    procesarCompra=()=>{
-
-    }
-
-    
     render() {
+        if (this.state.identity === false) {
+            return (
+                <Redirect to="/login" />
+            )
+        }
 
         var carrito;
         if (this.state.carrito.length >= 1) {
@@ -143,8 +104,8 @@ class Carrito extends Component {
                                             <div className="col">
                                                 <button className="btn btn-danger m-1" onClick={() => this.reducirItem(data.id)}>-</button>
                                             </div>
-                                            <div className="col text-center p-1"  style={{backgroundColor:'#A4AAA5', border:'1px solid black', borderRadius:'4px',color:'white'}}>
-                                                    <label className="text-center ">{data.cantidad}</label>
+                                            <div className="col text-center p-1" style={{ backgroundColor: '#A4AAA5', border: '1px solid black', borderRadius: '4px', color: 'white' }}>
+                                                <label className="text-center ">{data.cantidad}</label>
                                             </div>
                                             <div className="col">
                                                 <button className="btn btn-success m-1" onClick={() => this.agregarItem(data.id)}>+</button>
@@ -160,43 +121,21 @@ class Carrito extends Component {
                     </li>
                 );
             });
-        } else if (this.state.carrito.length===0 && this.loading===false) {
-            carrito = <h1 className="mt-5 text-center">No hay productos en el carrito</h1>
+        }else if (this.errorCarrito===true && this.loading===false) {
+            carrito = <h1 className="mt-5 text-center">Error al procesar compra</h1>
         } else {
             carrito =
                 <h1 className="mt-5 text-center">Cargando...</h1>
         }
-
-        if (this.state.identity === false) {
-            return (
-                <Redirect to="/login" />
-            )
-        } else {
-            return (
-                <div id="carrito" className="container-fluid mt-4">
-                    <div className="row ">
-                        <div className="col-12 text-left m-4">
-                        <h2>Carrito</h2>
-                        </div>
-                    </div>
-                    <div className="row">
-                    <div id="carrito-list" className="col-md-8 col-12 ml-3">
-                        <ul className="p-3">
-                            {carrito}
-                        </ul>
-                    </div>
-                    <div id="boton-procesar" className="col-12 col-md-3 align-self-center">
-                        <div className="row justify-content-center">
-                        <Link to={{ pathname: "/compra", state: { userId: this.userId } }} className="btn btn-primary" onClick={() => this.procesarCompra()}>Procesar compra</Link>
-                        </div>
-                    </div>
-
-                    </div>
-
-                </div>
-            );
-        } 
+        return (
+            <div id="compra" className="container-fluid mt-4">
+                <h1>Compra</h1>
+                <ul>
+                    {carrito}
+                </ul>
+            </div>
+        );
     }
 }
 
-export default Carrito;
+export default Compra;

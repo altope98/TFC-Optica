@@ -14,6 +14,7 @@ import Error from './components/Error'
 import PerfilUsuario from './components/PerfilUsuario';
 import PerfilAdmin from './components/PerfilAdmin';
 import Carrito from './components/Carrito';
+import Compra from './components/Compra';
 
 class Router extends Component {
     state = {
@@ -50,6 +51,7 @@ class Router extends Component {
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/servicios" component={Servicios} />
+                        <Route exact path="/compra" component={Compra} />
                         <Route exact path="/tienda/:id?" component={Tienda} />
                         <Route exact path="/carrito" component={Carrito} />
                         <Route exact path="/miperfil/:id" component={PerfilUsuario}/>
