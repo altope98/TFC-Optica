@@ -1,6 +1,6 @@
 var Global={
-      url: 'http://localhost:5000/api/'
-       /* url: 'https://api-react-optica.herokuapp.com/api/'    */
+       url: 'http://localhost:3000/'   
+       /* url: 'https://tope-vision.herokuapp.com/' */ 
 };
 
 export default Global

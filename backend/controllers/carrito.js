@@ -24,7 +24,6 @@ var controller= {
         let sid= request.sessionID;
         let carrito=controller.iniciarCarrito(request);
         let id = request.body.item_id;
-        console.log(sid);
         db.collection('productos').doc(id).get()
             .then(doc => {
                 if (!doc.exists) {
@@ -90,6 +89,19 @@ var controller= {
         });
     },
 
+    eliminarItem:(request,response)=>{
+        let carrito=request.session.carrito;
+        let id=request.body.item_id;
+        let pos= controller.verificar(carrito,id);
+        carrito.splice(pos,1);
+            request.session.carrito= carrito;
+        return response.status(200).send({
+            status: 'success',
+            message: "Producto eliminado",
+            carrito: request.session.carrito
+        });
+    },
+
     mostrarCarrito:(request, response)=>{
         let carrito=request.session.carrito;
         return response.status(200).send({
@@ -103,6 +115,15 @@ var controller= {
         request.session.carrito=carrito
 
     },
+
+    cerrarCarrito:(request, response)=>{
+        request.session.destroy();
+
+        return response.status(200).send({
+            status: 'success',
+            message:'Session closed'
+        });
+    }
 
 
     

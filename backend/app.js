@@ -10,8 +10,6 @@ var session=require('express-session');
 //EJECUTAR EXPRESS (HTTP)
 var app=express();
 
-
-
 //CARGAR FICHEROS DE RUTAS
 var clients_router= require('./routes/routes');
 
@@ -19,14 +17,6 @@ var clients_router= require('./routes/routes');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-//CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
 
 app.use(cookieParser());
 
@@ -38,7 +28,9 @@ app.use(session({
 
 
 //PREFIJOS A RUTAS  //CARGADO DE RUTAS
-app.use('/api',clients_router);
+app.use(clients_router);
+
+ app.use(express.static('public')); 
 
 
 //EXPORTAR MODULO

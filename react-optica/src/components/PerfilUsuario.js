@@ -380,7 +380,7 @@ class PerfilUsuario extends Component {
                                 ? <div id="info">
                                     <h1 className="mt-5">Problema con carga de Usuario</h1>
                                 </div>
-                                : <Redirect to="/tope-vision/login" />
+                                : <Redirect to="/login" />
                             }
                         </React.Fragment>
                     }

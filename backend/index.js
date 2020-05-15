@@ -35,7 +35,7 @@ var app= require('./app');
 
 
 const wakeUpDyno = require("./wakeUpDyno");
-const URL ="https://api-react-optica.herokuapp.com/api";
+const URL ="https://tope-vision.herokuapp.com";
 
 
 

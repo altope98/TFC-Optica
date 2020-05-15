@@ -117,7 +117,7 @@ class Login extends Component {
     render() {
         if (this.state.status === 'success') {
             return (
-                <Redirect to="/tope-vision/logged" />
+                <Redirect to="/logged" />
             )
         }
 
