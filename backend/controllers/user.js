@@ -356,29 +356,20 @@ var controller = {
 
 
 
-    notificacion: (request, response) => {
-
-        //bucle recorriendo doctores y sacando cada token de mensaje junto a las consultas del dia actual
-
+    /* notificacion: (request, response) => {
         var params = request.body;
         var token = params.token;
-
-
         var payload = {
             data: {
                 key: "Hola"
             }
         };
-
         console.log(token)
-
-        /*         var options={
+                var options={
                     priority:'high',
                     timeToLive: 60*60*24
                 };
-         */
-
-
+         
 
         //DENTRO DEL BUCLE ENVIAR A CADA TOKEN DE MENSAJE LAS CONSULTAS DEL DIA ACTUAL
         messaging.sendToDevice(token, payload).then((response) => {
@@ -395,7 +386,7 @@ var controller = {
                 message: "mensaje no enviado"
             });
         })
-    }
+    } */
 }
 
 module.exports = controller;

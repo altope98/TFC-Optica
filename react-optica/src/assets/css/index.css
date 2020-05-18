@@ -106,7 +106,13 @@ border-top: 2px solid black;
   margin-bottom: 14rem;
 }
 
+.cargando{
+  margin: 2rem;
+}
 
+.error{
+  margin: 2rem;
+}
 
 
 
@@ -192,6 +198,34 @@ border-top: 2px solid black;
 #carrito-list ul li{
   border: 1px solid black;
   border-radius: 20px;
+}
+
+
+.paypal-button{
+  animation: fadein 1s;
+  margin: 1rem 0 1rem 0;
+}
+
+.btn-stripe{
+  animation: fadein 1s;
+  background-color: #32325d;
+  border: 1px solid #7451cc;
+  border-radius: 30px;
+  transition: all .5s ease;
+  color: white;
+  font-size: 12px;
+  padding: 0.5rem 2.7rem 0.5rem 2.7rem;
+}
+
+.btn-stripe:hover{
+  background-color: #7451cc;
+  border: 1px solid #32325d;
+  color: white;
+}
+
+.img-stripe{
+  width: 3rem;
+  margin: 0 0.3rem 0 1rem;
 }
 
 
@@ -387,18 +421,29 @@ border-top: 2px solid black;
   .imagencarrito{
     width: 50%;
   }
+
+} 
+
+ @media (min-width: 940px ){
+    .container{
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .container-fluid{
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+
+
+/* ANIMACIONES */
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* @media (max-width:768){
-  .navbar-brand{
-    width: 30%;
-  }
-  .titulo{
-   margin: 2rem;
-  }
-  #slider img{
-    width: 100%;
-    height: 6rem;
-  
-  }
-} */
+
+/*  */

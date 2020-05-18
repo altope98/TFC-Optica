@@ -15,6 +15,8 @@ import PerfilUsuario from './components/PerfilUsuario';
 import PerfilAdmin from './components/PerfilAdmin';
 import Carrito from './components/Carrito';
 import Compra from './components/Compra';
+import UsuarioPedidos from './components/UsuarioPedidos';
+
 
 class Router extends Component {
     state = {
@@ -40,7 +42,7 @@ class Router extends Component {
         return (
             <BrowserRouter>
             {this.state.isLogged===true
-                ? <Header logged={true} />
+                ? <Header logged={true} />    //MIENTRAS ESTA CARGANDO EL USUARIO AQUI APARECE PANTALLA DE CARGA MEDIANTE UN PROP DE HIJO A PADRE
                 : <Header />
             }
                     <Switch>
@@ -55,6 +57,7 @@ class Router extends Component {
                         <Route exact path="/tienda/:id?" component={Tienda} />
                         <Route exact path="/carrito" component={Carrito} />
                         <Route exact path="/miperfil/:id" component={PerfilUsuario}/>
+                        <Route exact path="/mispedidos/:id" component={UsuarioPedidos}/>
                         <Route exact path="/adminperfil/:adminid" component={PerfilAdmin}/>
                         <Route exact path="/citas" component={Citas} />
                         <Route exact path="/logged" render={

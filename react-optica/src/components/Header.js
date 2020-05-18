@@ -120,7 +120,7 @@ class Header extends Component {
 
                                                 ?<React.Fragment>
                                                 <Link className="dropdown-item" to={"/miperfil/" + this.state.userId} >Mi perfil</Link>
-                                                 {/* <Link className="dropdown-item" to={"/mispedidos/" + this.state.userId} activeClassName="active">Mis pedidos</Link> */}
+                                                {/* <Link className="dropdown-item" to={"/mispedidos/" + this.state.userId}>Mis pedidos</Link> */}
                                                 </React.Fragment>
                                                 : <React.Fragment>
                                                 <Link className="dropdown-item" to={"/adminperfil/" + this.state.userId} >Administracion</Link>

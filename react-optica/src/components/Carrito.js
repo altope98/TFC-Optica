@@ -144,12 +144,15 @@ class Carrito extends Component {
                                                 <button className="btn btn-danger m-1" onClick={() => this.reducirItem(data.id)}>-</button>
                                             </div>
                                             <div className="col text-center p-1"  style={{backgroundColor:'#A4AAA5', border:'1px solid black', borderRadius:'4px',color:'white'}}>
-                                                    <label className="text-center ">{data.cantidad}</label>
+                                                    <label className="text-center "> {data.cantidad}</label>
                                             </div>
                                             <div className="col">
                                                 <button className="btn btn-success m-1" onClick={() => this.agregarItem(data.id)}>+</button>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className="col-xs-12 col-md-2 mt-2">
+                                            <label className="text-center ">Total: <strong>{data.precio_total} €</strong></label>
                                     </div>
                                     <div className="col mt-2">
                                         <button className="btn btn-danger mr-4 ml-4" onClick={() => this.eliminarItem(data.id)}>Eliminar</button>
@@ -173,14 +176,14 @@ class Carrito extends Component {
             )
         } else {
             return (
-                <div id="carrito" className="container-fluid mt-4">
+                <div id="carrito" className="container mt-4">
                     <div className="row ">
                         <div className="col-12 text-left m-4">
                         <h2>Carrito</h2>
                         </div>
                     </div>
                     <div className="row">
-                    <div id="carrito-list" className="col-md-8 col-12 ml-3">
+                    <div id="carrito-list" className="col-md-8 col-12 m-2">
                         <ul className="p-3">
                             {carrito}
                         </ul>

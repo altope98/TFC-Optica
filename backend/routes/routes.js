@@ -1,11 +1,16 @@
 'use strict'
 
+
+var { v4: uuidv4 } = require('uuid');
+var stripe = require('stripe')('sk_test_JzsYaMoBJKUncDeAEcc3igcA00cOZondJJ');
 var express=require('express');
 var UserController=require('../controllers/user');
 var CitasController=require('../controllers/citas');
 var EmailController=require('../emails/email');
 var CarritoController=require('../controllers/carrito');
 var ProductosController=require('../controllers/productos');
+var PedidosController=require('../controllers/pedidos');
+
 
 
 var router= express.Router();
@@ -41,7 +46,59 @@ router.get('/carrito', CarritoController.mostrarCarrito);
 
 router.post('/productos', ProductosController.getProductsByFilters);
 
+
+router.post('/pedido/generar', PedidosController.save);
+
+
+router.post('/pago' , async(request,response)=>{
+    try{
+        let token = request.body.token;
+        let total = request.body.total;
+
+        let customer = await stripe.customers.create(
+            {
+                email: token.email,
+                source: token.id
+            });
+        let idempotencyKey= uuidv4();
+
+        let charge = await stripe.charges.create(
+            {
+                amount: total * 100,
+                currency: 'EUR',
+                customer: customer.id,
+                receipt_email: token.email,
+                description: '',
+                shipping: {
+                    name: token.card.name,
+                    address: {
+                        line1: token.card.address_line1,
+                        line2: token.card.address_line2,
+                        city: token.card.address_city,
+                        country: token.card.address_country,
+                        postal_code: token.card.address_zip
+                    }
+                }
+            },{
+                idempotencyKey
+            }
+            
+            );
+            return response.status(200).send({
+                status: 'success',
+                token: token.id,
+            });
+
+                }catch(error){
+                    return response.status(200).send({
+                        status: 'error',
+                        error
+                    });
+                }        
+        }
+);
+
 /* router.post('/push', User.notificacion); */
-/*  router.post('/upload-image/:id?', MainController.upload); */
-/* router.post('/email', ArticleController.sendEmail); */
+
+
 module.exports=router
