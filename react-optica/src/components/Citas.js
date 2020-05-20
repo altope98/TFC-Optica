@@ -153,8 +153,8 @@ class Citas extends Component {
             </div>
             <div className="clearfix"></div>
             {this.state.status=== 'success'
-                ?<input type="submit" value="Pedir cita" class="btn btn-success" disabled />
-                :<input type="submit" value="Pedir cita" class="btn btn-success" />
+                ?<input type="submit" value="Pedir cita" className="btn btn-success" disabled />
+                :<input type="submit" value="Pedir cita" className="btn btn-success" />
             
             }
             

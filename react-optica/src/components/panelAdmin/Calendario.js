@@ -18,7 +18,6 @@ class Calendario extends Component {
         citas: [],
         message: null,
         status: null,
-        showmodal: false,
         show: false,
     }
 

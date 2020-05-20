@@ -49,7 +49,7 @@ class UsuariosAdmin extends Component {
                             <h5 className="card-title ">{data.user.nombre + ' ' + data.user.apellidos}</h5>
                             <small className="card-text">{data.user.email}</small><br />
                         </div>
-                        <div class="card-footer">
+                        <div className="card-footer">
                             <Link to={"/adminperfil/requestuser/" + data.userId} className="btn btn-primary">Ver Perfil</Link>
                         </div>
                     </div>
@@ -64,13 +64,13 @@ class UsuariosAdmin extends Component {
         } else if (this.state.users.length === undefined && this.state.status === 'error') {
             return (
                 <div id="clientes" className="text-center">
-                    <h1 className="mt-5">No hay clientes para mostrar</h1>
+                    <h1 className="mt-5 error">No hay clientes para mostrar</h1>
                 </div>
             );
         } else {
             return (
                 <div id="clientes" className="text-center">
-                    <h1 className="mt-5">Cargando...</h1>
+                    <h1 className="mt-5 cargando">Cargando...</h1>
                 </div>
             );
         }

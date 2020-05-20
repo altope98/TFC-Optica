@@ -35,6 +35,7 @@ router.post('/email/cita', EmailController.nuevaCita );
 router.post('/email/confirmacita', EmailController.confirmaCita );
 router.post('/email/cambiocita', EmailController.cambioCita );
 router.post('/email/recordatorio', EmailController.recordatorioCita );
+router.post('/email/adminpedido', EmailController.adminPedido );
 
 
 router.post('/carrito/agregar', CarritoController.agregarItem );
@@ -48,6 +49,10 @@ router.post('/productos', ProductosController.getProductsByFilters);
 
 
 router.post('/pedido/generar', PedidosController.save);
+router.get('/pedidos/:id', PedidosController.getPedidosUser);
+router.get('/pedido/:id', PedidosController.getPedidoById);
+router.get('/pendingpedidos', PedidosController.getPedidosPendientesyConfirmados);
+router.put('/pedido', PedidosController.updateEstado);
 
 
 router.post('/pago' , async(request,response)=>{

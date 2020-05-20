@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 
 import Header from './components/Header';
@@ -20,17 +20,17 @@ import UsuarioPedidos from './components/UsuarioPedidos';
 
 class Router extends Component {
     state = {
-        isLogged:false,
+        isLogged: false
     };
-    logged=()=>{
+    logged = () => {
         this.setState({
-            isLogged:true,  
+            isLogged: true
         })
     }
 
-    signout=()=>{
+    signout = () => {
         this.setState({
-            isLogged:false,
+            isLogged: false
         })
     }
 
@@ -39,16 +39,17 @@ class Router extends Component {
 
 
     render() {
-        return (
-            <BrowserRouter>
-            {this.state.isLogged===true
-                ? <Header logged={true} />    //MIENTRAS ESTA CARGANDO EL USUARIO AQUI APARECE PANTALLA DE CARGA MEDIANTE UN PROP DE HIJO A PADRE
-                : <Header />
-            }
+
+
+            return (
+                <BrowserRouter>
+                    {this.state.isLogged === true
+                        ? <Header logged={true}  />  
+                        : <Header />
+                    }
                     <Switch>
 
                         <Route exact path="/" component={Home} />
-                        {/* <Route exact path="/tope-vision" component={Home} /> */}
                         <Route exact path="/home" component={Home} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
@@ -56,40 +57,40 @@ class Router extends Component {
                         <Route exact path="/compra" component={Compra} />
                         <Route exact path="/tienda/:id?" component={Tienda} />
                         <Route exact path="/carrito" component={Carrito} />
-                        <Route exact path="/miperfil/:id" component={PerfilUsuario}/>
-                        <Route exact path="/mispedidos/:id" component={UsuarioPedidos}/>
-                        <Route exact path="/adminperfil/:adminid" component={PerfilAdmin}/>
+                        <Route exact path="/miperfil/:id" component={PerfilUsuario} />
+                        <Route exact path="/mispedidos/:id" component={UsuarioPedidos} />
+                        <Route exact path="/adminperfil/:adminid" component={PerfilAdmin} />
                         <Route exact path="/citas" component={Citas} />
                         <Route exact path="/logged" render={
-                            ()=>{   
-                                    this.logged();
-                                    return(
-                                        <Redirect to="/"/>
-                                    )
+                            () => {
+                                this.logged();
+                                return (
+                                    <Redirect to="/" />
+                                )
 
                             }
-                        }/>
+                        } />
                         <Route exact path="/signout" render={
-                            ()=>{   
-                                    this.signout();
-                                    return(
-                                        <Redirect to="/"/>
-                                    )
+                            () => {
+                                this.signout();
+                                return (
+                                    <Redirect to="/" />
+                                )
 
                             }
-                        }/>
-                        
+                        } />
+
 
                         <Route component={Error} />
                     </Switch>
 
-                    
-                    
-            
-                <Footer />
-            </BrowserRouter>
 
-        );
+
+
+                    <Footer />
+                </BrowserRouter>
+
+            );
     }
 
 }

@@ -320,7 +320,6 @@ var controller = {
         nombre:"Alvaro"
         telefono:"354235432"*/
 
-        console.log(requestedUser)
 
         db.collection('users').doc(request.body.userId).update(requestedUser).then(()=>{
             return response.status(200).send({

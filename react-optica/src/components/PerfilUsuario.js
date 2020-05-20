@@ -360,7 +360,7 @@ class PerfilUsuario extends Component {
                                                                     </li>
                                                                 );
                                                             })
-                                                            : <li className="list-group-item"><h3>No hay ningun historial</h3></li>
+                                                            : <li className="list-group-item error"><h3>No hay ningun historial</h3></li>
 
                                                         }
                                                     </ul>
@@ -391,7 +391,7 @@ class PerfilUsuario extends Component {
         } else {
             return (
                 <div id="info">
-                    <h1 className="mt-5">Cargando...</h1>
+                    <h1 className="mt-5 cargando">Cargando...</h1>
                 </div>
             );
         }

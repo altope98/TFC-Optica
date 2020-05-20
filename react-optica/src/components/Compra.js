@@ -302,7 +302,6 @@ class Compra extends Component {
     };
 
     onError = (error) => {
-        console.log(error);
         swal(
             'Pago no realizado',
             'Intentelo mas tarde',
@@ -454,7 +453,7 @@ class Compra extends Component {
             );
         } else {
             return (
-                <h1 className="cargando">Cargando...</h1>
+                <h1 className="mt-5 cargando">Cargando...</h1>
             )
         }
     }

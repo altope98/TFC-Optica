@@ -138,12 +138,12 @@ class Login extends Component {
                     </div>
                     <div className="form-group text-left">
                         <label htmlFor="password" className="ml-2">Contraseña</label>
-                        <input className="form-control mr-2 ml-2" type="password" name="password" ref={this.passwordRef} onChange={this.changeState} required minlength="6" />
+                        <input className="form-control mr-2 ml-2" type="password" name="password" ref={this.passwordRef} onChange={this.changeState} required minLength="6" />
                         {this.validator.message('password', this.state.password, 'required')}
 
                     </div>
                     <div className="clearfix"></div>
-                    <input type="submit" value="Iniciar sesion" class="btn btn-success" />
+                    <input type="submit" value="Iniciar sesion" className="btn btn-success" />
                 </form>
 
                 <div className="botonessesion">

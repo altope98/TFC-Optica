@@ -30,10 +30,6 @@ cron.schedule('30 15 * * Monday,Tuesday,Wednesday,Thursday,Sunday', () => {
     controller.envioRecordatorio();
 }); 
 
-/* cron.schedule('0 *//*1 * * * *', () => {
-    controller.envioRecordatorio();
-});  */
-
 
 var controller = {
 
@@ -48,7 +44,7 @@ var controller = {
             var htmlToSend = template(replacements);
             var mailOptions = {
                 from: 'opticatopevision@gmail.com',
-                to: 'opticatopevision@gmail.com, admin@admin.com',
+                to: 'opticatopevision@gmail.com',
                 subject: 'Nueva Cita Pendiente',
                 html: htmlToSend
 
@@ -210,7 +206,7 @@ var controller = {
                             var htmlToSend = template(replacements);
                             var mailOptions = {
                                 from: 'opticatopevision@gmail.com',
-                                to: 'opticatopevision@gmail.com, admin@admin.com',
+                                to: 'opticatopevision@gmail.com',
                                 subject: 'Citas para mañana',
                                 html: htmlToSend
                             };
@@ -264,6 +260,54 @@ var controller = {
                 console.log(err)
             });
     },
+
+    adminPedido: (request, response)=>{
+        let estado = request.body.state;
+        let pedido= request.body.pedido;
+        var html;
+        if(estado==='confirmado'){
+            html='pedidoconfirmado.html';
+        }else if(estado==='rechazado'){
+            html='pedidorechazado.html';
+        }else{
+            html='pedidoenviado.html';
+        }
+
+
+        readHTMLFile(__dirname + '/'+html, function (err, html) {
+            var template = handlebars.compile(html);
+            var replacements = {
+                nombre: pedido.detalles.nombre,
+                apellidos: pedido.detalles.apellidos,
+            };
+            var htmlToSend = template(replacements);
+            var mailOptions = {
+                from: 'opticatopevision@gmail.com',
+                to: pedido.detalles.email,
+                subject: 'Informacion de su pedido',
+                html: htmlToSend
+
+            };
+            transporter.sendMail(mailOptions, function (error, res) {
+                if (error) {
+                    return response.status(200).send({
+                        status: 'error',
+                        message: "Email no enviado",
+                        respuesta: error
+                    });
+                } else {
+                    return response.status(200).send({
+                        status: 'success',
+                        message: "Email enviado",
+                        respuesta: res
+                    });
+                }
+            });
+        });
+
+    }
+
+
 }
 
 module.exports = controller

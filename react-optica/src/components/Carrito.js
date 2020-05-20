@@ -164,10 +164,10 @@ class Carrito extends Component {
                 );
             });
         } else if (this.state.carrito.length===0 && this.loading===false) {
-            carrito = <h1 className="mt-5 text-center">No hay productos en el carrito</h1>
+            carrito = <h1 className="mt-5 text-center error">No hay productos en el carrito</h1>
         } else {
             carrito =
-                <h1 className="mt-5 text-center">Cargando...</h1>
+                <h1 className="mt-5 text-center cargando">Cargando...</h1>
         }
 
         if (this.state.identity === false) {

@@ -228,20 +228,20 @@ class Register extends Component {
                     </div>
                     <div className="form-group text-left">
                         <label htmlFor="password" className="ml-2">Contraseña</label>
-                        <input className="form-control mr-2 ml-2" type="password" name="password" ref={this.passwordRef} onChange={this.changeState} onBlur={this.changeState} required minlength="6" />
+                        <input className="form-control mr-2 ml-2" type="password" name="password" ref={this.passwordRef} onChange={this.changeState} onBlur={this.changeState} required minLength="6" />
                         {this.validator.message('password', this.state.user.password, 'required')}
 
                     </div>
                     <div className="form-group text-left">
                         <label htmlFor="password2" className="ml-2">Confirmar contraseña</label>
-                        <input className="form-control mr-2 ml-2" type="password" name="password2" ref={this.password2Ref} onChange={this.changeState} onBlur={this.changeState} onKeyUp={this.changeState} required minlength="6" />
+                        <input className="form-control mr-2 ml-2" type="password" name="password2" ref={this.password2Ref} onChange={this.changeState} onBlur={this.changeState} onKeyUp={this.changeState} required minLength="6" />
                         {this.confirmpassword === false &&
                             <small>La contraseña no coincide</small>
                         }
 
                     </div>
                     <div className="clearfix"></div>
-                    <input type="submit" onFocus={this.changeState} onClick={this.changeState} value="Registro" class="btn btn-success" />
+                    <input type="submit" onFocus={this.changeState} onClick={this.changeState} value="Registro" className="btn btn-success" />
                 </form>
             </div>
         );

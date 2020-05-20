@@ -180,7 +180,7 @@ class Tienda extends Component {
                             <h4 className="card-title ">{data.product.nombre}</h4>
                             <p className="card-text h5">{data.product.precio} €</p><br />
                         </div>
-                        <div class="card-footer pt-2 pb-2">
+                        <div className="card-footer pt-2 pb-2">
 
                             <button className="btn btn-primary" onClick={() => this.pulsadoEvento(data.productId)}>Ver producto</button>
                         </div>
@@ -188,13 +188,13 @@ class Tienda extends Component {
                 );
             });
         } else if (this.state.status === 'error') {
-            listProducts = <h1 className="mt-5 text-center">No hay productos para mostrar</h1>
+            listProducts = <h1 className="mt-5 text-center error">No hay productos para mostrar</h1>
 
 
 
         } else {
             listProducts =
-                <h1 className="mt-5 text-center">Cargando...</h1>
+                <h1 className="mt-5 text-center cargando">Cargando...</h1>
 
 
 
@@ -207,12 +207,16 @@ class Tienda extends Component {
         } else { 
             return (
                 <div id="tienda" className="container-fluid mt-3">
+                    
+
                     <div className="row">
-                        <div id="filtros" className="col-2 ml-4">
-                            <div class="form-group text-left m-2">
+                        
+                        <div id="filtros" className="col-md-2 col-12 mt-2 ">
+                        
+                            <div className="form-group text-left m-2">
                                 <label htmlFor="categoria">Categorias: </label>
-                                <select class="form-control" name="categoria" onChange={this.onCategoriaChange}>
-                                    <option selected value="gafas">Gafas de sol</option>
+                                <select className="form-control" name="categoria" onChange={this.onCategoriaChange}>
+                                    <option defaultValue value="gafas">Gafas de sol</option>
                                     <option value="lentillas">Lentillas</option>
                                     <option value="limpieza">Limpieza y accesorios</option>
                                 </select>
@@ -220,35 +224,36 @@ class Tienda extends Component {
 
                             <div className="genero text-left m-2">
                                 <label htmlFor="genero" >Genero: </label>
-                                <div class="form-check">
-                                    <input type="radio" checked={this.state.genero === 'masculino'} class="form-check-input" name="masculino" value="masculino" onChange={this.onGeneroChange} />
-                                    <label class="form-check-label" htmlFor="masculino">Hombre</label>
+                                <div className="form-check">
+                                    <input type="radio" checked={this.state.genero === 'masculino'} className="form-check-input" name="masculino" value="masculino" onChange={this.onGeneroChange} />
+                                    <label className="form-check-label" htmlFor="masculino">Hombre</label>
                                 </div>
                                 <div className="form-check">
-                                    <input type="radio" class="form-check-input" checked={this.state.genero === 'femenino'} name="femenino" value="femenino" onChange={this.onGeneroChange} />
-                                    <label class="form-check-label" htmlFor="femenino">Mujer</label>
+                                    <input type="radio" className="form-check-input" checked={this.state.genero === 'femenino'} name="femenino" value="femenino" onChange={this.onGeneroChange} />
+                                    <label className="form-check-label" htmlFor="femenino">Mujer</label>
 
                                 </div>
                             </div>
                             <div className="edad text-left m-2">
                                 <label htmlFor="edad" >Edad: </label>
-                                <div class="form-check">
-                                    <input type="radio" checked={this.state.edad === 'adulto'} class="form-check-input" name="adulto" value="adulto" onChange={this.onEdadChange} />
-                                    <label class="form-check-label" htmlFor="adulto">Adulto</label>
+                                <div className="form-check">
+                                    <input type="radio" checked={this.state.edad === 'adulto'} className="form-check-input" name="adulto" value="adulto" onChange={this.onEdadChange} />
+                                    <label className="form-check-label" htmlFor="adulto">Adulto</label>
                                 </div>
                                 <div className="form-check">
-                                    <input type="radio" checked={this.state.edad === 'infantil'} class="form-check-input" name="infantil" value="infantil" onChange={this.onEdadChange} />
-                                    <label class="form-check-label" htmlFor="infantil">Infantil</label>
+                                    <input type="radio" checked={this.state.edad === 'infantil'} className="form-check-input" name="infantil" value="infantil" onChange={this.onEdadChange} />
+                                    <label className="form-check-label" htmlFor="infantil">Infantil</label>
 
                                 </div>
                             </div>
                         </div>
-                        <div id="productos" className="col-7 m-2">
+                        
+                        <div id="productos" className="col-7 ml-2 mt-2">
                             {listProducts}
                         </div>
 
                         {this.loadedCarrito===true &&
-                        <div id="carrito-button" className="col-2 m-2 p-3">
+                        <div id="carrito-button" className="col-md-2 col-12 align-content-center align-items-center align-self-center justify-content-center m-2 p-3">
                             <Link to={{ pathname: "/carrito", state: { userId: this.userId, carrito: this.state.carrito } }} className="ircarrito btn btn-primary text-center" >
                                 
                                     <div className="numeroitems d-inline pr-2 pl-2 m-3 d-flex align-items-center justify-content-center align-self-center"><span className="m-2">{this.state.carrito.length} </span><img className="m-2" src={"../" + carrito} alt="icono-carrito" /></div>
@@ -302,7 +307,7 @@ class Tienda extends Component {
 
                 </div>
             );
-        }
+     }
 
      } 
 }

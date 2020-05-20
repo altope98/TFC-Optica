@@ -10,7 +10,6 @@ class CitasAdmin extends Component {
 
     state = {
         citas: [],
-        message: null,
         status: null,
     }
 
@@ -25,8 +24,7 @@ class CitasAdmin extends Component {
 
             } else {
                 this.setState({
-                    status: 'error',
-                    message: response.data.message
+                    status: 'error'
                 });
 
             }
@@ -64,7 +62,6 @@ class CitasAdmin extends Component {
                 axios.post(this.url+'email/confirmacita', {cita});
 
             }else{
-                console.log(response.data.error)
                 swal(
                     'Cita no se ha guardado correctamente',
                     'Cita no se ha guardado en tu calendario',
@@ -84,7 +81,8 @@ class CitasAdmin extends Component {
                                 <h5>{data.cita.user.nombre + ' ' + data.cita.user.apellidos}</h5>
                                 <p>{data.cita.user.email}</p>
                             </div>
-                        <form className="col-8" onSubmit={(e)=>this.updateCita(e, data.citaId, i)}>
+                            <div className="col-md-8 col-12">
+                        <form  onSubmit={(e)=>this.updateCita(e, data.citaId, i)}>
                             <div className="row">
                                 <div className="col">
                             <input className="form-control m-1" type="date" name="fechaCita"  required/>
@@ -92,9 +90,12 @@ class CitasAdmin extends Component {
                             <div className="col">
                             <input className="form-control m-1 " type="time" name="horaCita"  min="09:00" max="20:00" required  />
                             </div>
+                            <div className="col">
                             <input className="btn btn-success mr-4 ml-4" type="submit"  value="Aceptar"/>
                             </div>
+                            </div>
                         </form>
+                        </div>
                         </div>
                     </li>
 
@@ -109,13 +110,13 @@ class CitasAdmin extends Component {
         } else if (this.state.citas.length === undefined || this.state.status === 'error') {
             return (
                 <div id="clientes" className="text-center">
-                    <h1 className="mt-5">No hay citas para mostrar</h1>
+                    <h1 className="mt-5 error">No hay citas para mostrar</h1>
                 </div>
             );
         } else {
             return (
                 <div id="clientes" className="text-center">
-                    <h1 className="mt-5">Cargando...</h1>
+                    <h1 className="mt-5 cargando">Cargando...</h1>
                 </div>
             );
         }

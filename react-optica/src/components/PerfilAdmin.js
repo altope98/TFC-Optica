@@ -3,10 +3,11 @@ import { auth } from '../db';
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
 import Global from "../Global";
-import UsuariosAdmin from './panelAdmin/UsuariosAdmin'
-import CitasAdmin from './panelAdmin/CitasAdmin'
-import PerfilUsuario from './PerfilUsuario'
-import Calendario from './panelAdmin/Calendario'
+import UsuariosAdmin from './panelAdmin/UsuariosAdmin';
+import PedidosAdmin from './panelAdmin/PedidosAdmin';
+import CitasAdmin from './panelAdmin/CitasAdmin';
+import PerfilUsuario from './PerfilUsuario';
+import Calendario from './panelAdmin/Calendario';
 import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 
 class PerfilAdmin extends Component {
@@ -82,9 +83,9 @@ class PerfilAdmin extends Component {
                                     <MDBNavItem>
                                         <MDBNavLink to={"/adminperfil/" + this.userId + "/calendario"}>Calendario</MDBNavLink>
                                     </MDBNavItem>
-                                    {/* <MDBNavItem>
+                                    <MDBNavItem>
                                         <MDBNavLink to={"/adminperfil/" + this.userId + "/pedidos"}>Pedidos</MDBNavLink>
-                                    </MDBNavItem>  */}
+                                    </MDBNavItem>
                                 </MDBNav>
 
 
@@ -100,9 +101,9 @@ class PerfilAdmin extends Component {
                                     <Route path={"/adminperfil/" + this.userId + "/calendario"} >
                                         <Calendario />
                                     </Route>
-                                    {/* <Route path={"/adminperfil/" + this.userId + "/pedidos"} >
+                                    <Route path={"/adminperfil/" + this.userId + "/pedidos"} >
                                         <PedidosAdmin />
-                                    </Route> */}
+                                    </Route> 
                                     <Route exact path="/perfil/:id/:admin" component={PerfilUsuario}/>
                                     <Route path={"/adminperfil/requestuser/:id"}
                                         render={
@@ -133,7 +134,7 @@ class PerfilAdmin extends Component {
 
             }else{
                 return(
-                    <h1>Cargando....</h1>
+                    <h1 className="mt-5 cargando">Cargando....</h1>
                 );
             }
     }
