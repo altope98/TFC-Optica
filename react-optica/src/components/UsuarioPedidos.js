@@ -93,7 +93,6 @@ class UsuarioPedidos extends Component {
 
     render() {
         var pedidos;
-        this.pvp = 0;
         if (this.state.pedidos.length >= 1) {
             pedidos = this.state.pedidos.map((data, i) => {
                 return (

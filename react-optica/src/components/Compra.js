@@ -341,24 +341,28 @@ class Compra extends Component {
         this.pvp = 0;
         if (this.state.carrito.length >= 1) {
             carrito = this.state.carrito.map((data, i) => {
-                this.pvp = this.pvp + data.precio_total;
+                this.pvp = this.pvp +  parseFloat(data.precio_total);
                 return (
 
                     <li key={i} className="list-group-item m-2">
                         <div className="row">
-                            <div className=" col-8 text-md-left text-center" >
+                            <div className=" col-4 text-md-left text-center" >
                                 <img src={data.imagen} className="imagencarrito" alt="Cartimg" />
-                                <p className="d-inline  m-3">{data.nombre}</p>
+                                
+                            </div>
+                            <div className=" col-4 text-md-left text-center align-self-center" >
+                                
+                                <p className="m-3">{data.nombre}</p>
                             </div>
                             <div className="col-4 align-self-center">
                                 <div className="row justify-content-center">
                                     <div className="col mt-2">
                                         <div className="row flex-nowrap align-items-center justify-content-center align-self-center">
                                             <div className="col text-center p-1" >
-                                                <label className="text-center ">Cantidad: <strong>{data.cantidad}</strong></label>
+                                                <label className="text-center m-2 ">Cantidad: <br/> <strong>{data.cantidad}</strong></label>
                                             </div>
                                             <div className="col text-center p-1" >
-                                                <label className="text-center ">Total: <strong>{data.precio_total} €</strong></label>
+                                                <label className="text-center m-2">Total: <br/> <strong>{data.precio_total} €</strong></label>
                                             </div>
                                         </div>
                                     </div>
@@ -379,12 +383,12 @@ class Compra extends Component {
             return (
                 <div id="compra" className="container-fluid mt-4">
                     <div className="row ">
-                        <div className="col-12 text-left m-4 wow fadeInRight">
-                            <h2>Procesando compra</h2>
+                        <div className="col-12 text-left wow fadeInRight">
+                            <h2 className="m-3">Procesando compra</h2>
                         </div>
                     </div>
                     <div className="row">
-                        <div id="direciones" className="col-md-6 col-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+                        <div id="direciones" className="col-lg-6 col-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                             <div className="form-group text-left">
                                 <label htmlFor="nombre" className="ml-2">Nombre</label>
                                 <input id="nombre" className="form-control mr-2 ml-2" type="text" value={this.state.user.nombre} name="nombre" ref={this.nombreRef} /* onChange={this.changeState} */ onKeyUp={this.changeState} required />
@@ -426,17 +430,17 @@ class Compra extends Component {
                                 {this.validator.message('direccion', this.state.pedido.direccion, 'required')}
                             </div>
                         </div>
-                        <div className="col-md-6 col-12">
+                        <div className="col-lg-6 col-12">
                             <div className="row">
-                                <div id="buy-list" className="col-12 ml-3 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                                <div id="buy-list" className="col-12 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
                                     <ul className="p-3">
                                         {carrito}
-                                        <li className="list-group-item m-2 text-right"><p className="h6 mr-3">Total a pagar: {this.pvp} €</p></li>
+                                        <li className="list-group-item m-2 text-right"><p className="h5 mr-3">Total a pagar: <strong>{this.pvp} €</strong></p></li>
                                     </ul>
                                 </div>
                             </div>
                             <div className="row">
-                                <div id="pagos" className="col-12 ml-3 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
+                                <div id="pagos" className="col-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
                                     {this.state.buttons === true
                                         ? <React.Fragment>
                                             <StripeCheckout ComponentClass="boton-pago" locale="es" currency="EUR" stripeKey="pk_test_xQbGMr8UIbCrgGFLNQ2l5LbI00SVNQjKoV" token={this.onToken} amount={this.pvp * 100}  >

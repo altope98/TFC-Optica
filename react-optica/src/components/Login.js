@@ -5,6 +5,8 @@ import Global from "../Global";
 import SimpleReactValidator from 'simple-react-validator';
 import { auth } from '../db'
 import firebase from 'firebase';
+import swal from 'sweetalert';
+
 
 import WOW from 'wowjs'
 
@@ -110,7 +112,11 @@ class Login extends Component {
                     status: 'success'
                 })
             }).catch((err) => {
-                alert(err.message)
+                swal(
+                    'Autenticacion incorrecta',
+                    'Comprueba email y contraseña',
+                    'error'
+                );
             })
         } else {
             this.validator.showMessages();
