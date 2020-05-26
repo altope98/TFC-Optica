@@ -126,6 +126,12 @@ border-top: 2px solid black;
 
 
 /* HOME */
+
+#map{
+  width: 100%;
+  height: 15rem;
+}
+
 .titulo{
   margin-top: 2rem;
 }
@@ -159,6 +165,8 @@ border-top: 2px solid black;
 
 #clientes .card img{
   width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 /*  */
@@ -190,10 +198,13 @@ border-top: 2px solid black;
 
 #productos .card img{
   width: 100%;
+  height: 40%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .imagencarrito{
-  width: 30%;
+  width: 100%;
 }
 
 #carrito-list ul{
@@ -360,6 +371,39 @@ border-top: 2px solid black;
 
 /*  */
 
+/* SERVICIOS */
+.item-servicios{
+	color:black;
+	text-align: center;
+	background-color: #d4d4d4;  /*  #535353; */
+	border: 2px ridge black;
+	border-radius: 10px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  height: 100%;
+
+}
+.item-servicios p{
+	text-align: left;
+	padding: 1.5rem;
+}
+.item-servicios .icono{
+  width: 20%;
+	font-size: 5rem;
+	padding-bottom: 2rem;
+	color: #6D0A1B;
+	transition: all 1s ease;
+}
+
+.item-servicios:hover .icono{
+	color: #BC203A;
+	transform: rotateY(360deg);
+	transform-style: preserve-3d;
+}
+
+/*  */
+
 /*CALENDARIO*/
 
 .rbc-event{
@@ -431,6 +475,9 @@ border-top: 2px solid black;
   width: 100%;
   height: 12rem;
 
+}
+.imagencarrito{
+  width: 50%;
 }
 
 .navbar-nav li a{

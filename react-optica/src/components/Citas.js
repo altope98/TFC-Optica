@@ -4,6 +4,7 @@ import Global from "../Global";
 import SimpleReactValidator from 'simple-react-validator';
 import swal from 'sweetalert';
 
+import WOW from 'wowjs'
 
 class Citas extends Component {
     nombreRef = React.createRef();
@@ -21,6 +22,12 @@ class Citas extends Component {
             telefono:null
         },
         status:null
+    }
+
+    componentDidMount(){
+        new WOW.WOW({
+            live: false
+        }).init();
     }
 
 
@@ -125,12 +132,12 @@ class Citas extends Component {
     render() { 
         return ( 
         <div id="citas" className=" col-12">
-        <h2 className="text-center p-3 text-md-left">
+        <h2 className="text-center p-3 text-md-left wow fadeInRight">
             Pedir Cita
         </h2>
         <hr />
 
-        <form className="col-md-5" onSubmit={this.recibirFormulario} >
+        <form className="col-md-5 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" onSubmit={this.recibirFormulario} >
             <div className="form-group text-left">
                 <label htmlFor="nombre" className="ml-2">Nombre</label>
                 <input id="nombre" className="form-control mr-2 ml-2" type="text" name="nombre" ref={this.nombreRef} onChange={this.changeState} required />

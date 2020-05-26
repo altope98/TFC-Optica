@@ -5,6 +5,8 @@ import Global from "../Global";
 import swal from 'sweetalert';
 import { Redirect, Link } from 'react-router-dom';
 
+import WOW from 'wowjs'
+
 
 class Carrito extends Component {
     url = Global.url
@@ -21,6 +23,11 @@ class Carrito extends Component {
 
     componentDidMount() {
 
+            new WOW.WOW({
+                live: false
+            }).init();
+        
+    
         this.getCarrito();
     }
     componentWillMount() {
@@ -132,11 +139,14 @@ class Carrito extends Component {
 
                     <li key={i} className="list-group-item m-2">
                         <div className="row">
-                            <div className="col-md-4 col-12 text-md-left text-center" >
+                            <div className="col-lg-2 col-12 text-lg-left text-center" >
                                 <img src={data.imagen} className="imagencarrito" alt="Cartimg" />
-                                <p className="d-md-inline  m-3">{data.nombre}</p>
                             </div>
-                            <div className="col-md-8 col-12 align-self-center">
+                            <div className="col-lg-2 col-12 text-lg-left text-center" >
+                                
+                                <p className=" m-3">{data.nombre}</p>
+                            </div>
+                            <div className="col-lg-8 col-12 align-self-center">
                                 <div className="row justify-content-center">
                                     <div className="col mt-2">
                                         <div className="row flex-nowrap align-items-center justify-content-center align-self-center">
@@ -151,8 +161,8 @@ class Carrito extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-xs-12 col-md-2 mt-2">
-                                            <label className="text-center ">Total: <strong>{data.precio_total} €</strong></label>
+                                    <div className="col-xs-12 col-lg-2 mt-2 pl-3 pr-3">
+                                            <label className="text-center ">Total: <br/><strong>{data.precio_total} €</strong></label>
                                     </div>
                                     <div className="col mt-2">
                                         <button className="btn btn-danger mr-4 ml-4" onClick={() => this.eliminarItem(data.id)}>Eliminar</button>
@@ -178,17 +188,17 @@ class Carrito extends Component {
             return (
                 <div id="carrito" className="container mt-4">
                     <div className="row ">
-                        <div className="col-12 text-left m-4">
+                        <div className="col-12 text-left m-4 wow fadeInRight">
                         <h2>Carrito</h2>
                         </div>
                     </div>
                     <div className="row">
-                    <div id="carrito-list" className="col-md-8 col-12 m-2">
+                    <div id="carrito-list" className="col-lg-8 col-12 m-2 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
                         <ul className="p-3">
                             {carrito}
                         </ul>
                     </div>
-                    <div id="boton-procesar" className="col-12 col-md-3 align-self-center">
+                    <div id="boton-procesar" className="col-12 col-lg-3 align-self-center wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
                         <div className="row justify-content-center">
                         <Link to={{ pathname: "/compra", state: { userId: this.userId } }} className="btn btn-primary" onClick={() => this.procesarCompra()}>Procesar compra</Link>
                         </div>
@@ -199,7 +209,7 @@ class Carrito extends Component {
                 </div>
             );
         } 
-    }
+    } 
 }
 
 export default Carrito;

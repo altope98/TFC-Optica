@@ -115,21 +115,21 @@ class PedidosAdmin extends Component {
                             <div className="col-md-3 col-9 pedido-list-item" onClick={() => this.pulsadoEvento(data.pedidoId)}>
                                 <div className="row  ">
                                     <div className="col-5 m-1">
-                                        <h6>Fecha: </h6>
+                                        <p className="font-weight-bold">Fecha: </p>
                                         <p>{data.pedido.fecha}</p>
                                     </div>
                                     <div className="col-5 m-1">
-                                        <h6>Estado:</h6>
+                                        <p className="font-weight-bold">Estado:</p>
                                         <p>{data.pedido.estado}</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="col-md-5 col-12 m-1">
-                                <button className="btn btn-success mr-1 ml-1" onClick={() => this.updatePedido(data.pedidoId, i, 'confirmado')}>Confirmar</button>
-                                <button className="btn btn-primary mr-1 ml-1" onClick={() => this.updatePedido(data.pedidoId, i, 'enviado')}>Enviado</button>
-                                <button className="btn btn-secondary mr-1 ml-1" onClick={() => this.updatePedido(data.pedidoId, i, 'terminado')}>Terminado</button>
-                                <button className="btn btn-danger mr-1 ml-1" onClick={() => this.updatePedido(data.pedidoId, i, 'rechazado')}>Rechazar</button>
+                                <button className="btn btn-success m-1" onClick={() => this.updatePedido(data.pedidoId, i, 'confirmado')}>Confirmar</button>
+                                <button className="btn btn-primary m-1" onClick={() => this.updatePedido(data.pedidoId, i, 'enviado')}>Enviado</button>
+                                <button className="btn btn-secondary m-1" onClick={() => this.updatePedido(data.pedidoId, i, 'terminado')}>Terminado</button>
+                                <button className="btn btn-danger m-1" onClick={() => this.updatePedido(data.pedidoId, i, 'rechazado')}>Rechazar</button>
                             </div>
 
                         </div>

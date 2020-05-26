@@ -6,6 +6,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import swal from 'sweetalert';
 import { storage } from '../db';
 
+import WOW from 'wowjs'
 
 class Register extends Component {
 
@@ -73,6 +74,12 @@ class Register extends Component {
 
             },
         });
+    }
+
+    componentDidMount(){
+        new WOW.WOW({
+            live: false
+        }).init();
     }
 
     changeState = () => {
@@ -188,12 +195,12 @@ class Register extends Component {
         return (
 
             <div id="registro" className=" col-12">
-                <h2 className="text-center p-3 text-md-left">
+                <h2 className="text-center p-3 text-md-left wow fadeInRight">
                     Registro
                 </h2>
                 <hr />
 
-                <form className="col-md-5" onSubmit={this.recibirFormulario} >
+                <form className="col-md-5 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" onSubmit={this.recibirFormulario} >
                     <div className="form-group text-left">
                         <label htmlFor="nombre" className="ml-2" >Nombre</label>
                         <input id="nombre" className="form-control mr-2 ml-2" type="text" name="nombre" ref={this.nombreRef} onChange={this.changeState} required />

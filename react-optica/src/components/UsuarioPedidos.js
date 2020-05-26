@@ -5,6 +5,7 @@ import Global from "../Global";
 import { Modal, Button } from 'react-bootstrap';
 
 
+
 class UsuarioPedidos extends Component {
     userId = null;
     url = Global.url
@@ -19,6 +20,7 @@ class UsuarioPedidos extends Component {
         show: false,
     }
     componentDidMount() {
+
         if (!auth.currentUser) {
             this.setState({
                 identity: false
@@ -98,17 +100,17 @@ class UsuarioPedidos extends Component {
                     <li key={i} className="list-group-item m-2">
                         <div className="row">
                             <div className="col-md-4 col-12 mt-2 mb-2 text-md-left text-center" >
-                                <p className="h6">Fecha</p>
+                                <p className="font-weight-bold">Fecha:</p>
                                 <p >{data.pedido.fecha}</p>
                             </div>
                             <div className="col-md-4 col-12 mt-2 mb-2 estados-pedidos">
                                 <div className="row justify-content-center">
                                     <div className=" col-4 " >
-                                        <p className="h6">PVP</p>
+                                        <p className="font-weight-bold">PVP:</p>
                                         <p>{data.pedido.precio_total}€</p>
                                     </div>
                                     <div className=" col-4" >
-                                        <p className="h6">Estado</p>
+                                        <p className="font-weight-bold">Estado:</p>
                                         <p >{data.pedido.estado}</p>
                                     </div>
                                 </div>
@@ -121,20 +123,20 @@ class UsuarioPedidos extends Component {
                 );
             });
         } else if (this.state.errorPedidos === true && this.state.loading === false) {
-            pedidos = <h1 className="mt-5 text-center error">No hay pedidos</h1>
+            pedidos = <h1 className="mt-5 text-center error ">No hay pedidos</h1>
         } else {
             pedidos =
-                <h1 className="mt-5 text-center cargando">Cargando...</h1>
+                <h1 className="mt-5 text-center cargando  ">Cargando...</h1>
         }
 
 
         if (this.state.identity === true && this.state.loading === false) {
 
             return (
-                <div className="col-12">
+                <div className="col-12  wow fadeInRight">
                     <div className="row">
                         <div id="pedidos-list" className="col-12 ml-3">
-                            <h1 className="m-2 text-md-left text-center">Mis pedidos</h1>
+                            <h1 className="m-2 text-md-left text-center ">Mis pedidos</h1>
                             <ul className="p-3">
                                 {pedidos}
                             </ul>
@@ -200,7 +202,7 @@ class UsuarioPedidos extends Component {
             );
         } else {
             return (
-                <h1 className="cargando">Cargando...</h1>
+                <h1 className="cargando ">Cargando...</h1>
             )
         }
     }

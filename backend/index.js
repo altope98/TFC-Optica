@@ -35,7 +35,7 @@ var app= require('./app');
 
 
 const wakeUpDyno = require("./wakeUpDyno");
-const URL ="https://tope-vision.herokuapp.com";
+const URL ="https://topevision.herokuapp.com";
 
 
 

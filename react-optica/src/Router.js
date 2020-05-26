@@ -16,6 +16,8 @@ import PerfilAdmin from './components/PerfilAdmin';
 import Carrito from './components/Carrito';
 import Compra from './components/Compra';
 import UsuarioPedidos from './components/UsuarioPedidos';
+/* import AddProducto from './components/AddProducto'; */
+
 
 
 class Router extends Component {
@@ -35,7 +37,7 @@ class Router extends Component {
     }
 
 
-
+    
 
 
     render() {
@@ -61,6 +63,7 @@ class Router extends Component {
                         <Route exact path="/mispedidos/:id" component={UsuarioPedidos} />
                         <Route exact path="/adminperfil/:adminid" component={PerfilAdmin} />
                         <Route exact path="/citas" component={Citas} />
+                        {/* <Route exact path="/add" component={AddProducto} /> */}
                         <Route exact path="/logged" render={
                             () => {
                                 this.logged();

@@ -7,6 +7,9 @@ import swal from 'sweetalert';
 import carrito from '../assets/images/carrito.svg'
 import { Modal, Button } from 'react-bootstrap'
 
+
+import WOW from 'wowjs'
+
 class Tienda extends Component {
 
     url = Global.url
@@ -73,6 +76,12 @@ class Tienda extends Component {
     componentDidMount() {
         this.getProductos();
         this.getCarrito();
+
+       
+            new WOW.WOW({
+                live: false
+            }).init();
+        
 
     }
 
@@ -174,7 +183,7 @@ class Tienda extends Component {
 
                 return (
 
-                    <div key={i} className="card" >
+                    <div key={i} className="card " >
                         <img className="card-img-top" src={data.product.imagen} alt="Cardcap" />
                         <div className="card-body pt-0 pb-0">
                             <h4 className="card-title ">{data.product.nombre}</h4>
@@ -204,14 +213,14 @@ class Tienda extends Component {
             return (
                 <Redirect to="/login" />
             )
-        } else { 
+        } else {  
             return (
                 <div id="tienda" className="container-fluid mt-3">
                     
 
                     <div className="row">
                         
-                        <div id="filtros" className="col-md-2 col-12 mt-2 ">
+                        <div id="filtros" className="col-md-4 col-12 mt-2 wow fadeIn ">
                         
                             <div className="form-group text-left m-2">
                                 <label htmlFor="categoria">Categorias: </label>
@@ -246,14 +255,8 @@ class Tienda extends Component {
 
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div id="productos" className="col-7 ml-2 mt-2">
-                            {listProducts}
-                        </div>
-
-                        {this.loadedCarrito===true &&
-                        <div id="carrito-button" className="col-md-2 col-12 align-content-center align-items-center align-self-center justify-content-center m-2 p-3">
+                            {this.loadedCarrito===true &&
+                        <div id="carrito-button" className="col-12 align-content-center align-items-center align-self-center justify-content-center m-2 p-3 wow fadeIn">
                             <Link to={{ pathname: "/carrito", state: { userId: this.userId, carrito: this.state.carrito } }} className="ircarrito btn btn-primary text-center" >
                                 
                                     <div className="numeroitems d-inline pr-2 pl-2 m-3 d-flex align-items-center justify-content-center align-self-center"><span className="m-2">{this.state.carrito.length} </span><img className="m-2" src={"../" + carrito} alt="icono-carrito" /></div>
@@ -262,15 +265,17 @@ class Tienda extends Component {
 
                         </div>
                         }
-
-
-
+                        </div>
+                        
+                        <div id="productos" className="col-md-8 col-12 justify-content-md-start justify-content-center wow slideInRight" data-wow-duration="1s" data-wow-delay="0.3s">
+                            {listProducts}
+                        </div>
 
 
                         {this.productaux.length === 1 &&
                             <Modal show={this.state.show} onHide={this.cerradoEvento} size="lg"
                                 aria-labelledby="contained-modal-title-vcenter"
-                                centered>
+                                centered className="wow fadeIn">
                                 <Modal.Header closeButton>
                                     <Modal.Title className="text-center">
                                         <img className="img-item" src={this.productaux[0].product.imagen} alt="iamgen-item" />
@@ -309,7 +314,7 @@ class Tienda extends Component {
             );
      }
 
-     } 
+      }  
 }
 
 export default Tienda;

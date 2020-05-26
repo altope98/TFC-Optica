@@ -32,6 +32,7 @@ router.get('/updatedcitas', CitasController.getUpdatedCitas );
 
 
 router.post('/email/cita', EmailController.nuevaCita );
+router.post('/email/pedido', EmailController.nuevoPedido );
 router.post('/email/confirmacita', EmailController.confirmaCita );
 router.post('/email/cambiocita', EmailController.cambioCita );
 router.post('/email/recordatorio', EmailController.recordatorioCita );
@@ -46,6 +47,7 @@ router.get('/carrito', CarritoController.mostrarCarrito);
 
 
 router.post('/productos', ProductosController.getProductsByFilters);
+router.post('/producto', ProductosController.save);
 
 
 router.post('/pedido/generar', PedidosController.save);

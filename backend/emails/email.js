@@ -305,7 +305,41 @@ var controller = {
             });
         });
 
-    }
+    },
+
+    nuevoPedido: (request, response) => {
+
+        readHTMLFile(__dirname + '/nuevopedido.html', function (err, html) {
+            var template = handlebars.compile(html);
+            var replacements = {
+                nombre: '',
+                apellidos: ''
+            };
+            var htmlToSend = template(replacements);
+            var mailOptions = {
+                from: 'opticatopevision@gmail.com',
+                to: 'opticatopevision@gmail.com',
+                subject: 'Nuevo Pedido Pendiente',
+                html: htmlToSend
+
+            };
+            transporter.sendMail(mailOptions, function (error, res) {
+                if (error) {
+                    return response.status(200).send({
+                        status: 'error',
+                        message: "Email no enviado",
+                        respuesta: error
+                    });
+                } else {
+                    return response.status(200).send({
+                        status: 'success',
+                        message: "Email enviado",
+                        respuesta: res
+                    });
+                }
+            });
+        });
+    },
 
 
 }

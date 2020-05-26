@@ -6,6 +6,8 @@ import SimpleReactValidator from 'simple-react-validator';
 import { auth } from '../db'
 import firebase from 'firebase';
 
+import WOW from 'wowjs'
+
 
 
 class Login extends Component {
@@ -21,6 +23,13 @@ class Login extends Component {
         status: null,
         user: {},
     };
+
+    componentDidMount(){
+        new WOW.WOW({
+            live: false
+        }).init();
+    }
+
     componentWillMount() {
         this.validator = new SimpleReactValidator({
             messages: {
@@ -125,12 +134,12 @@ class Login extends Component {
 
             <div id="login" className=" col-12">
 
-                <h2 className="text-center p-3 text-md-left">
+                <h2 className="text-center p-3 text-md-left wow fadeInRight">
                     Iniciar sesion
                 </h2>
                 <hr />
 
-                <form className="col-md-5" onSubmit={this.recibirFormulario} >
+                <form className="col-md-5 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" onSubmit={this.recibirFormulario}  >
                     <div className="form-group text-left">
                         <label htmlFor="email" className="ml-2">Email</label>
                         <input className="form-control mr-2 ml-2" type="text" name="email" ref={this.emailRef} onChange={this.changeState} required />
@@ -146,7 +155,7 @@ class Login extends Component {
                     <input type="submit" value="Iniciar sesion" className="btn btn-success" />
                 </form>
 
-                <div className="botonessesion">
+                <div className="botonessesion wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
                     <button className="btngoogle row" onClick={() => this.inicioGoogle()}><img src="https://www.gstatic.com/mobilesdk/160512_mobilesdk/auth_service_google.svg" alt="google-boton" /> <p>Inicia sesion con Google</p></button>
                     <button className="btnfacebook row" onClick={() => this.inicioFacebook()}><img src="https://www.gstatic.com/mobilesdk/160409_mobilesdk/images/auth_service_facebook.svg" alt="facebook-boton" /> <p>Inicia sesion con Facebook</p></button>
 

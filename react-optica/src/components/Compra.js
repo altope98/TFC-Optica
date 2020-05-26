@@ -9,7 +9,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import StripeCheckout from 'react-stripe-checkout';
 import moment from 'moment'
 
-
+import WOW from 'wowjs'
 
 class Compra extends Component {
     url = Global.url
@@ -42,6 +42,12 @@ class Compra extends Component {
 
     componentDidMount() {
         this.getCarrito();
+
+            new WOW.WOW({
+                live: false
+            }).init();
+        
+    
     }
 
     componentWillMount() {
@@ -204,6 +210,8 @@ class Compra extends Component {
                             'success'
                         );
 
+                        axios.post(this.url + 'email/pedido');
+
                         this.setState({
                             completed: true
                         })
@@ -278,6 +286,8 @@ class Compra extends Component {
                         'En breves confirmaremos su pedido, ID: ' + pedidoId,
                         'success'
                     );
+
+                    axios.post(this.url + 'email/pedido');
 
                     this.setState({
                         completed: true
@@ -369,12 +379,12 @@ class Compra extends Component {
             return (
                 <div id="compra" className="container-fluid mt-4">
                     <div className="row ">
-                        <div className="col-12 text-left m-4">
+                        <div className="col-12 text-left m-4 wow fadeInRight">
                             <h2>Procesando compra</h2>
                         </div>
                     </div>
                     <div className="row">
-                        <div id="direciones" className="col-md-6 col-12">
+                        <div id="direciones" className="col-md-6 col-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                             <div className="form-group text-left">
                                 <label htmlFor="nombre" className="ml-2">Nombre</label>
                                 <input id="nombre" className="form-control mr-2 ml-2" type="text" value={this.state.user.nombre} name="nombre" ref={this.nombreRef} /* onChange={this.changeState} */ onKeyUp={this.changeState} required />
@@ -418,7 +428,7 @@ class Compra extends Component {
                         </div>
                         <div className="col-md-6 col-12">
                             <div className="row">
-                                <div id="buy-list" className="col-12 ml-3">
+                                <div id="buy-list" className="col-12 ml-3 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
                                     <ul className="p-3">
                                         {carrito}
                                         <li className="list-group-item m-2 text-right"><p className="h6 mr-3">Total a pagar: {this.pvp} €</p></li>
@@ -426,7 +436,7 @@ class Compra extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div id="pagos" className="col-12 ml-3">
+                                <div id="pagos" className="col-12 ml-3 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
                                     {this.state.buttons === true
                                         ? <React.Fragment>
                                             <StripeCheckout ComponentClass="boton-pago" locale="es" currency="EUR" stripeKey="pk_test_xQbGMr8UIbCrgGFLNQ2l5LbI00SVNQjKoV" token={this.onToken} amount={this.pvp * 100}  >
