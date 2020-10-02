@@ -1,7 +1,7 @@
 {
   "name": "react-optica",
   "version": "0.1.0",
-  "proxy":"http://localhost:5000",
+  "proxy": "http://localhost:5000",
   "homepage": "./",
   "private": true,
   "dependencies": {
@@ -22,10 +22,12 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-moment": "^0.9.7",
+    "react-redux": "^7.2.1",
     "react-responsive-carousel": "^3.2.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-stripe-checkout": "^2.6.3",
+    "redux": "^4.0.5",
     "simple-react-validator": "^1.4.5",
     "sweetalert": "^2.1.2",
     "wowjs": "^1.1.3"

@@ -17,6 +17,7 @@ import WOW from 'wowjs'
 class Home extends Component {
     state = {}
 
+
     componentDidMount(){
         new WOW.WOW({
             live: false

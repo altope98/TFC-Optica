@@ -110,7 +110,7 @@ class Login extends Component {
                 this.setState({
                     password: null,
                     status: 'success'
-                })
+                }, ()=>window.location="/")  //HACER CALLBACK PARA ALMACENAR EN REDUX STORE
             }).catch((err) => {
                 swal(
                     'Autenticacion incorrecta',
@@ -128,6 +128,14 @@ class Login extends Component {
 
     }
 
+    changeStore=()=>{
+
+
+
+
+
+    }
+
 
     render() {
         if (this.state.status === 'success') {
@@ -139,7 +147,6 @@ class Login extends Component {
         return (
 
             <div id="login" className=" col-12">
-
                 <h2 className="text-center p-3 text-md-left wow fadeInRight">
                     Iniciar sesion
                 </h2>

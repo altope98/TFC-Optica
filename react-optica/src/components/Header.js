@@ -14,7 +14,6 @@ class Header extends Component {
         user: {},
         userId: null,
         redirect:false,
-
     }
 
     componentDidUpdate() {
