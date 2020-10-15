@@ -14,7 +14,7 @@ const wakeUpDyno = (url, interval = 25, callback) => {
             Will try again in ${interval} minutes...`);
         }
         finally {
-
+            
             try {
                 callback(); // execute callback, if passed
             }

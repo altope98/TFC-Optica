@@ -189,7 +189,6 @@ var controller = {
 
     },
 
-
     getEmailById:(request,response)=>{
         var id = request.params.id;
         try {
@@ -308,6 +307,7 @@ var controller = {
                     });
                 });
     },
+
     update:(request,response)=>{
         let requestedUser=request.body.user;
         let url=request.body.url;

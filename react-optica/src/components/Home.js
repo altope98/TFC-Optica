@@ -10,14 +10,14 @@ import d from '../assets/images/d.png'
 
 import niña from '../assets/images/niña-glasses.jpg'
 import dog from '../assets/images/dog-glasses.jpg'
-import familia from '../assets/images/familia-glasses.jpg'
+import familia from '../assets/images/familia-glasses.jpg';
 
 import WOW from 'wowjs'
 
 class Home extends Component {
     state = {}
 
-    componentDidMount(){
+    componentDidMount() {
         new WOW.WOW({
             live: false
         }).init();
@@ -86,17 +86,17 @@ class Home extends Component {
                                         interval={6000}
                                         transitionTime={1000}
                                         showStatus={false}
-                                        showIndicators={false} 
+                                        showIndicators={false}
 
                                     >
                                         <div>
-                                            <img src={familia} style={{height:"15rem", border:"2px solid black"}}  alt="carrousel1" />
+                                            <img src={familia} style={{ height: "15rem", border: "2px solid black" }} alt="carrousel1" />
                                         </div>
                                         <div>
-                                            <img src={niña}  style={{height:"15rem", border:"2px solid black"}} alt="carrousel4" />
+                                            <img src={niña} style={{ height: "15rem", border: "2px solid black" }} alt="carrousel4" />
                                         </div>
                                         <div>
-                                            <img src={dog} style={{height:"15rem", border:"2px solid black"}} alt="carrousel2" />
+                                            <img src={dog} style={{ height: "15rem", border: "2px solid black" }} alt="carrousel2" />
                                         </div>
 
 

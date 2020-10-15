@@ -6,6 +6,8 @@ const Footer=()=>{
         <div className="center">
             <p>
                 &copy; Alvaro Torrente Perez
+
+                {/* GITHUB AND LINKEDIN */}
             </p>
         </div>
     </footer> );

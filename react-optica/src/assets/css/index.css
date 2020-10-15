@@ -392,12 +392,11 @@ border-top: 2px solid black;
   width: 20%;
 	font-size: 5rem;
 	padding-bottom: 2rem;
-	color: #6D0A1B;
 	transition: all 1s ease;
 }
 
 .item-servicios:hover .icono{
-	color: #BC203A;
+
 	transform: rotateY(360deg);
 	transform-style: preserve-3d;
 }
