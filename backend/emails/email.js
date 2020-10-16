@@ -51,6 +51,7 @@ var controller = {
             };
             transporter.sendMail(mailOptions, function (error, res) {
                 if (error) {
+                    console.log(error)
                     return response.status(200).send({
                         status: 'error',
                         message: "Email no enviado",
